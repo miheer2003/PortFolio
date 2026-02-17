@@ -1,0 +1,117 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all var(--transition);
+    background: transparent;
+}
+
+.navContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+}
+
+.navLinks {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+}
+
+.navLinks li a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    transition: color var(--transition);
+    position: relative;
+}
+
+.navLinks li a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    transition: width var(--transition);
+}
+
+.navLinks li a:hover {
+    color: var(--text-primary);
+}
+
+.navLinks li a:hover::after {
+    width: 100%;
+}
+
+/* Scrolled State - Glassmorphism */
+.navbar.scrolled {
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar.scrolled .navContainer {
+    padding: 1.5rem 3rem;
+}
+
+/* Mobile Menu */
+.burger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+    }
+
+    .navLinks {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        background: rgba(18, 18, 26, 0.95);
+        backdrop-filter: blur(20px);
+        border-left: 1px solid var(--border-color);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 6rem 2rem;
+        gap: 2rem;
+        transition: right var(--transition-slow);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .navLinks.active {
+        right: 0;
+    }
+
+    .navContainer {
+        padding: 1.5rem;
+    }
+
+    .navbar.scrolled .navContainer {
+        padding: 1rem 1.5rem;
+    }
+}

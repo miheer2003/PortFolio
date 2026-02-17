@@ -1,0 +1,118 @@
+.bentoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.bentoItem {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    padding: 4rem;
+    min-height: 400px;
+    transition: all var(--transition);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+}
+
+.bentoItem::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: var(--transition-slow);
+}
+
+.bentoItem:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-primary);
+}
+
+.bentoItem:hover::before {
+    opacity: 0.05;
+}
+
+.bentoContent {
+    position: relative;
+    z-index: 1;
+}
+
+.bentoContent h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bentoContent p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.skillsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.skillItem {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: all var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    min-height: 60px;
+}
+
+.skillItem::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.skillItem:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--glow-primary);
+}
+
+.skillItem:hover::before {
+    opacity: 0.15;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .bentoItem {
+        padding: 2.5rem;
+        min-height: auto;
+    }
+
+    .skillsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}

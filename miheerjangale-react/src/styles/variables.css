@@ -1,0 +1,44 @@
+/* Premium Aesthetic Design System - Ultra Stylish */
+:root {
+    /* Light Blue Background Theme */
+    --bg-primary: #e0f2fe;
+    --bg-secondary: #f0f9ff;
+    --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #dbeafe 100%);
+    --bg-card: rgba(255, 255, 255, 0.6);
+    --bg-card-hover: rgba(255, 255, 255, 0.8);
+
+    /* Text Colors for Light Background */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+
+    /* Accent Colors - Translucent Light Blue */
+    --accent-primary: rgba(96, 165, 250, 0.8);
+    --accent-secondary: rgba(59, 130, 246, 0.9);
+    --accent-gradient: linear-gradient(135deg, rgba(96, 165, 250, 0.7) 0%, rgba(59, 130, 246, 0.8) 100%);
+
+    /* Border & Glass Effects */
+    --border-color: rgba(59, 130, 246, 0.15);
+    --glass-border: rgba(59, 130, 246, 0.2);
+    --glass-bg: rgba(255, 255, 255, 0.5);
+
+    /* Shadows & Glows */
+    --shadow-sm: 0 2px 8px rgba(59, 130, 246, 0.1);
+    --shadow-md: 0 8px 24px rgba(59, 130, 246, 0.15);
+    --shadow-lg: 0 16px 48px rgba(59, 130, 246, 0.2);
+    --glow-primary: 0 0 40px rgba(96, 165, 250, 0.3);
+    --glow-hover: 0 0 60px rgba(96, 165, 250, 0.5);
+
+    /* Typography */
+    --font-primary: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Transitions */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Layout */
+    --border-radius: 16px;
+    --spacing-section: 8rem;
+}
