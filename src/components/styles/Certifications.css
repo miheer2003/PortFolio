@@ -1,0 +1,185 @@
+.cert-section {
+  width: 100%;
+  max-width: var(--cMaxWidth);
+  margin: auto;
+  padding: 120px 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* Subtle background element */
+.cert-section::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(109, 129, 150, 0.05) 0%, transparent 60%);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.cert-container {
+  width: var(--cWidth);
+  margin: auto;
+}
+
+.cert-section h2 {
+  font-size: 70px;
+  font-weight: 500;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.cert-section h2 span {
+  color: var(--accentColor);
+  font-family: "Geist", sans-serif;
+  font-weight: 300;
+}
+
+/* Horizontal slider layout */
+.cert-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 30px;
+  padding: 20px 40px 60px 40px;
+  -webkit-overflow-scrolling: touch;
+  /* Hide scrollbar for a cleaner look */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cert-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Slideable Queue Cards - Circular Rectangle */
+.cert-card {
+  flex: 0 0 400px;
+  background: rgba(40, 40, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 40px; /* Highly rounded corners */
+  padding: 40px 40px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: grab;
+}
+
+.cert-card:active {
+  cursor: grabbing;
+}
+
+/* Subtle top highlight */
+.cert-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.cert-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(109, 129, 150, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Top bar with emoji and year */
+.cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.cert-emoji {
+  font-size: 35px;
+  background: rgba(255, 255, 255, 0.05);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.02);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cert-card:hover .cert-emoji {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.cert-year {
+  font-family: "Geist", sans-serif;
+  color: var(--accentColor);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  background: rgba(109, 129, 150, 0.15);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.cert-card h3 {
+  font-size: 26px;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+  color: #F5F0E8;
+  line-height: 1.2;
+  position: relative;
+  z-index: 2;
+}
+
+.cert-issuer {
+  color: var(--accentColor);
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+.cert-card p:last-child {
+  color: #8A7F72;
+  font-size: 15px;
+  margin: 0;
+  font-weight: 300;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 900px) {
+  .cert-section h2 {
+    font-size: 50px;
+  }
+  .cert-card {
+    flex: 0 0 320px;
+    padding: 30px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .cert-section h2 {
+    font-size: 40px;
+  }
+  .cert-card {
+    flex: 0 0 280px;
+    padding: 25px;
+  }
+}
