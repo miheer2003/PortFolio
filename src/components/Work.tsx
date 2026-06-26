@@ -25,7 +25,7 @@ const Work = () => {
               <h4>Tools and features</h4>
               <p>Java, Spring Boot, React.js, MySQL, Docker, JWT</p>
             </div>
-            <WorkImage image="/images/optiroute.jpg" alt="OptiRoute" link="https://github.com/miheer2003/OptiRoute" />
+            <WorkImage image={`${import.meta.env.BASE_URL}images/optiroute.jpg`} alt="OptiRoute" link="https://github.com/miheer2003/OptiRoute" />
           </div>
           <div className="work-box">
             <div className="work-info">
@@ -39,7 +39,7 @@ const Work = () => {
               <h4>Tools and features</h4>
               <p>Python, TensorFlow, Keras, OpenCV, CNN, pyttsx3</p>
             </div>
-            <WorkImage image="/images/sign-language.jpg" alt="Sign Language Recognition" link="https://github.com/miheer2003/Sign-Language-Recognition-Using-ML" />
+            <WorkImage image={`${import.meta.env.BASE_URL}images/sign-language.jpg`} alt="Sign Language Recognition" link="https://github.com/miheer2003/Sign-Language-Recognition-Using-ML" />
           </div>
           <div className="work-box">
             <div className="work-info">
@@ -53,7 +53,7 @@ const Work = () => {
               <h4>Tools and features</h4>
               <p>Python, Scikit-learn, Decision Tree, Random Forest</p>
             </div>
-            <WorkImage image="/images/devoptimizer.jpg" alt="Software Dev Optimization" />
+            <WorkImage image={`${import.meta.env.BASE_URL}images/devoptimizer.jpg`} alt="Software Dev Optimization" />
           </div>
           <div className="work-box">
             <div className="work-info">
@@ -67,7 +67,7 @@ const Work = () => {
               <h4>Tools and features</h4>
               <p>Python, OpenCV, MediaPipe, Hand Tracking</p>
             </div>
-            <WorkImage image="/images/virtual-calculator.jpg" alt="Virtual Calculator" link="https://github.com/miheer2003/Virtual-Calculator" />
+            <WorkImage image={`${import.meta.env.BASE_URL}images/virtual-calculator.jpg`} alt="Virtual Calculator" link="https://github.com/miheer2003/Virtual-Calculator" />
           </div>
           <div className="work-box">
             <div className="work-info">
@@ -81,7 +81,7 @@ const Work = () => {
               <h4>Tools and features</h4>
               <p>Next.js, Node.js, Express, Machine Learning</p>
             </div>
-            <WorkImage image="/images/bazaar-aaina.jpg" alt="Bazaar Aaina" link="https://github.com/miheer2003/Bazaar-Aaina" />
+            <WorkImage image={`${import.meta.env.BASE_URL}images/bazaar-aaina.jpg`} alt="Bazaar Aaina" link="https://github.com/miheer2003/Bazaar-Aaina" />
           </div>
         </div>
       </div>

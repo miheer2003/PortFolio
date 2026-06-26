@@ -188,7 +188,7 @@ const TechStack = () => {
         />
 
         <Environment
-          files="/models/char_enviorment.hdr"
+          files={`${import.meta.env.BASE_URL}models/char_enviorment.hdr`}
           environmentIntensity={0.3}
           environmentRotation={[0, 4, 2]}
         />
