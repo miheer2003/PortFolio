@@ -116,11 +116,7 @@ const Certifications = () => {
               </div>
             )}
             <div className="cert-header">
-              {cert.emoji ? (
-                <span className="cert-emoji">{cert.emoji}</span>
-              ) : (
-                <div style={{ flex: 1 }}></div> /* Spacer if no emoji */
-              )}
+              <div style={{ flex: 1 }}></div>
               <span className="cert-year">{cert.year}</span>
             </div>
             <h3>{cert.title}</h3>

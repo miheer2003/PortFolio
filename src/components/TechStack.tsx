@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, OrbitControls, Html, Line, Text, Billboard } from "@react-three/drei";
+import { OrbitControls, Html, Line, Billboard, Text } from "@react-three/drei";
 
 const techData = [
   { name: "Java", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
@@ -29,21 +29,6 @@ const techData = [
   { name: "Three.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg" },
   { name: "Next.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" }
 ];
-
-function OrbitRing({ radius }: { radius: number }) {
-  const points = useMemo(() => {
-    const pts = [];
-    for (let i = 0; i <= 64; i++) {
-      const angle = (i / 64) * Math.PI * 2;
-      pts.push(new THREE.Vector3(Math.cos(angle) * radius, 0, Math.sin(angle) * radius));
-    }
-    return pts;
-  }, [radius]);
-
-  return (
-    <Line points={points} color="#C9A96E" lineWidth={1.5} transparent opacity={0.3} />
-  );
-}
 
 function IconNode({ data, position, delay, globeRef }: { data: { name: string, url: string }, position: THREE.Vector3, delay: number, globeRef: any }) {
   const ref = useRef<THREE.Group>(null);
@@ -83,7 +68,6 @@ function IconNode({ data, position, delay, globeRef }: { data: { name: string, u
             flexDirection: "column", 
             alignItems: "center",
             cursor: "pointer",
-            // We removed transform from transition since useFrame handles it now
           }}
         >
           {/* Main Logo Image */}
@@ -170,7 +154,6 @@ function LogoSphere({ radius = 12 }) {
 
   const groupRef = useRef<THREE.Group>(null);
   const globeRef = useRef<THREE.Mesh>(null);
-  const textGlobeRef = useRef<THREE.Mesh>(null);
 
   // Rotate and breathe the entire network web
   useFrame((state, delta) => {
