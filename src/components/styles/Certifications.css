@@ -44,13 +44,15 @@
   display: flex;
   overflow-x: auto;
   gap: 30px;
-  padding: 20px 40px 60px 40px;
+  padding: 20px calc(50vw - 200px) 60px calc(50vw - 200px);
   -webkit-overflow-scrolling: touch;
   /* Hide scrollbar for a cleaner look */
   scrollbar-width: none;
   -ms-overflow-style: none;
   width: 100%;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
 
 .cert-grid::-webkit-scrollbar {
@@ -71,6 +73,7 @@
   flex-direction: column;
   position: relative;
   cursor: grab;
+  scroll-snap-align: center;
 }
 
 .cert-card:active {
@@ -172,6 +175,9 @@
     flex: 0 0 320px;
     padding: 30px;
   }
+  .cert-grid {
+    padding: 20px calc(50vw - 160px) 60px calc(50vw - 160px);
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -182,4 +188,29 @@
     flex: 0 0 280px;
     padding: 25px;
   }
+  .cert-grid {
+    padding: 20px calc(50vw - 140px) 60px calc(50vw - 140px);
+  }
+}
+
+.cert-image-wrapper {
+  width: 100%;
+  height: 180px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cert-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cert-card:hover .cert-image-wrapper img {
+  transform: scale(1.05);
 }

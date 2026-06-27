@@ -98,6 +98,8 @@ body {
   margin: auto;
   margin-top: 100px;
   margin-bottom: 0;
+  z-index: 10;
+  overflow: visible;
 }
 
 .techstack h2 {
