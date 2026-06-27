@@ -44,7 +44,9 @@
   display: flex;
   overflow-x: auto;
   gap: 30px;
-  padding: 20px calc(50vw - 200px) 60px calc(50vw - 200px);
+  /* Top, Right, Bottom, Left */
+  padding: 20px 40px 60px 40px;
+  scroll-padding-left: 40px;
   -webkit-overflow-scrolling: touch;
   /* Hide scrollbar for a cleaner look */
   scrollbar-width: none;
@@ -73,7 +75,7 @@
   flex-direction: column;
   position: relative;
   cursor: grab;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
 }
 
 .cert-card:active {
@@ -176,7 +178,8 @@
     padding: 30px;
   }
   .cert-grid {
-    padding: 20px calc(50vw - 160px) 60px calc(50vw - 160px);
+    padding: 20px 30px 60px 30px;
+    scroll-padding-left: 30px;
   }
 }
 
@@ -189,7 +192,8 @@
     padding: 25px;
   }
   .cert-grid {
-    padding: 20px calc(50vw - 140px) 60px calc(50vw - 140px);
+    padding: 20px 20px 60px 20px;
+    scroll-padding-left: 20px;
   }
 }
 
