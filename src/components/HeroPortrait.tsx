@@ -184,18 +184,7 @@ const HeroPortrait = ({ src, onReady }: { src: string; onReady: () => void }) =>
     const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
     io.observe(frame);
 
-    const onMove = (e: PointerEvent) => {
-      const r = frame.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = 1 - (e.clientY - r.top) / r.height;
-      target.mx = x;
-      target.my = y;
-      const pad = 0.2;
-      target.hover = x > -pad && x < 1 + pad && y > -pad && y < 1 + pad ? 1 : 0;
-      target.tiltY = (e.clientX / window.innerWidth - 0.5) * 0.5;
-      target.tiltX = -(e.clientY / window.innerHeight - 0.5) * 0.35;
-    };
-    if (fine) window.addEventListener("pointermove", onMove);
+    // No pointer interaction: the portrait only animates on its own and with scroll.
 
     let velocity = 0;
     const tick = (time: number) => {
@@ -243,7 +232,6 @@ const HeroPortrait = ({ src, onReady }: { src: string; onReady: () => void }) =>
     return () => {
       disposed = true;
       gsap.ticker.remove(tick);
-      window.removeEventListener("pointermove", onMove);
       window.removeEventListener("site:enter", onEnter);
       ro.disconnect();
       io.disconnect();
