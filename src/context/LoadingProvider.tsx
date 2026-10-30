@@ -1,39 +1,31 @@
 import {
   createContext,
   PropsWithChildren,
+  useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import Loading from "../components/Loading";
 
 interface LoadingType {
   isLoading: boolean;
-  setIsLoading: (state: boolean) => void;
-  setLoading: (percent: number) => void;
 }
 
 export const LoadingContext = createContext<LoadingType | null>(null);
 
 export const LoadingProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [loading, setLoading] = useState(0);
-
-  const value = {
-    isLoading,
-    setIsLoading,
-    setLoading,
-  };
-  useEffect(() => {}, [loading]);
+  const handleDone = useCallback(() => setIsLoading(false), []);
 
   return (
-    <LoadingContext.Provider value={value as LoadingType}>
-      {isLoading && <Loading percent={loading} />}
+    <LoadingContext.Provider value={{ isLoading }}>
+      {isLoading && <Loading onDone={handleDone} />}
       <main className="main-body">{children}</main>
     </LoadingContext.Provider>
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLoading = () => {
   const context = useContext(LoadingContext);
   if (!context) {

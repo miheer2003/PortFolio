@@ -1,0 +1,93 @@
+.stack-groups {
+  border-top: 1px solid var(--line);
+}
+.stack-group {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.stack-label {
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.stack-label h3 {
+  margin: 0;
+}
+.stack-note {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--latte);
+  font-size: 10px;
+}
+.stack-mark {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  margin: 0 3px;
+}
+.stack-item.is-concept {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--line-strong);
+}
+.stack-group.is-genai .stack-item:not(.is-concept) {
+  background: var(--bg-elev-2);
+}
+.stack-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stack-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 18px 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  transition: border-color 0.4s var(--ease-out), background-color 0.4s var(--ease-out),
+    transform 0.6s var(--ease-out);
+}
+.stack-item svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-dim);
+  transition: color 0.4s var(--ease-out);
+}
+.stack-item:hover {
+  border-color: rgba(92, 23, 38, 0.35);
+  background: var(--bg-elev-2);
+  transform: translateY(-2px);
+}
+.stack-item:hover svg {
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .stack-group {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .stack-label {
+    padding-top: 0;
+  }
+  .stack-item {
+    height: 40px;
+    font-size: 14px;
+  }
+}

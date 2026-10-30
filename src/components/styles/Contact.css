@@ -1,92 +1,132 @@
-.contact-section {
-  margin: auto;
-  padding-bottom: 100px;
-  margin-top: 100px;
+.contact {
+  overflow: hidden;
+  isolation: isolate;
+  margin-top: var(--section-gap);
+  padding-top: clamp(80px, 10vw, 160px);
+  background: var(--espresso);
+  border-radius: clamp(24px, 3vw, 40px) clamp(24px, 3vw, 40px) 0 0;
+  /* local palette for the dark block */
+  --text: var(--latte);
+  --text-dim: rgba(255, 248, 231, 0.62);
+  --text-mute: rgba(255, 248, 231, 0.45);
+  --line: rgba(255, 248, 231, 0.12);
+  --line-strong: rgba(255, 248, 231, 0.24);
+  --accent: var(--cream);
+  color: var(--text);
 }
-.contact-section h3 {
-  font-size: 60px;
-  font-weight: 400;
-  text-transform: uppercase;
-  margin: 0;
+.contact ::selection {
+  background: var(--cream);
+  color: var(--espresso);
 }
-.contact-flex {
+.contact-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -40vmax;
+  z-index: -1;
+  width: 110vmax;
+  height: 70vmax;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(124, 30, 50, 0.55) 0%,
+    rgba(92, 23, 38, 0.18) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.contact-kicker {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
 }
-.contact-flex h4 {
+.contact-title {
+  max-width: 14ch;
+  font-size: clamp(48px, 8.4vw, 148px);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
   font-weight: 500;
-  margin: 0;
-  opacity: 0.6;
 }
-.contact-box {
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: clamp(20px, 2.2vw, 34px);
+  letter-spacing: -0.03em;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line-strong);
+  transition: border-color 0.5s var(--ease-out), color 0.5s var(--ease-out);
+}
+.contact-email svg {
+  transition: transform 0.6s var(--ease-out);
+}
+.contact-email:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.contact-email:hover svg {
+  transform: translate(4px, -4px);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: clamp(80px, 10vw, 160px);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.contact-grid > div {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
 }
-.contact-flex p {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-a.contact-social {
-  font-size: 25px;
-  border-bottom: 1px solid #8A7F72;
-}
-.contact-box h2 {
-  font-weight: 400;
-  font-size: 23px;
+.contact-grid ul {
+  list-style: none;
   margin: 0;
-}
-.contact-box h2 > span {
-  color: var(--accentColor);
-}
-.contact-box h5 {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
+  padding: 0;
   display: flex;
-  gap: 10px;
-  opacity: 0.5;
+  flex-direction: column;
+  gap: 8px;
 }
-@media only screen and (max-width: 1600px) {
-  .contact-section h3 {
-    font-size: 50px;
-  }
-  .contact-box h2 {
-    font-size: 20px;
-  }
-  a.contact-social {
-    font-size: 22px;
-  }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 80px;
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--line);
 }
-@media only screen and (max-width: 1300px) {
-  .contact-section h3 {
-    font-size: 40px;
-  }
-  .contact-box h2 {
-    font-size: 18px;
-  }
-  a.contact-social {
-    font-size: 20px;
-  }
-  .contact-flex p {
-    margin-top: 0px;
-  }
+.footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.4s var(--ease-out);
 }
-@media only screen and (max-width: 900px) {
-  .contact-flex {
+.footer-top:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer {
     flex-direction: column;
-    gap: 40px;
-  }
-  .contact-flex p {
-    margin-bottom: 0px;
-  }
-  .contact-flex h4 {
-    margin-top: 20px;
-  }
-  .contact-section {
-    margin-top: 50px;
-    padding-bottom: 50px;
-  }
-  .contact-container {
-    width: calc(100% - 25px);
+    align-items: flex-start;
   }
 }

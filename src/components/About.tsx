@@ -1,16 +1,44 @@
 import "./styles/About.css";
+import SectionHead from "./SectionHead";
 
-const About = () => {
-  return (
-    <div className="about-section" id="about">
-      <div className="about-me">
-        <h3 className="title">About Me</h3>
-        <p className="para">
-          I'm Miheer Jangale, a PG-DAC graduate from CDAC ACTS, Pune, and a Full Stack Java Developer passionate about building scalable web applications using Java, Spring Boot, React.js, and MySQL. I enjoy combining clean engineering with AI-driven solutions to create fast, intelligent, and impactful digital experiences
+const FACTS = [
+  { k: "Role", v: "AI Engineer, Nutsovertech" },
+  { k: "Education", v: "PG-DAC, CDAC ACTS · AIR 23" },
+  { k: "Focus", v: "LLMs, RAG, full-stack Java" },
+  { k: "Based in", v: "Pune, India" },
+];
+
+const About = () => (
+  <section className="section about" id="about">
+    <div className="wrap">
+      <SectionHead index="01" label="About" />
+
+      <p className="about-statement" data-reveal="lines">
+        I'm Miheer, an AI Engineer at Nutsovertech and a full-stack Java
+        developer. I combine clean engineering with AI to build software that
+        is fast, intelligent and useful.
+      </p>
+
+      <div className="about-grid">
+        <p className="about-body" data-reveal="fade">
+          I completed the PG-DAC programme at CDAC ACTS, Pune with an All India
+          Rank of 23. Before that I earned a
+          B.Tech in Computer Engineering from MIT ADT University. I work across
+          Java, Spring Boot, React and MySQL, and build LLM-powered workflows
+          with RAG and agent tooling.
         </p>
+
+        <dl className="about-facts" data-reveal="stagger">
+          {FACTS.map(({ k, v }) => (
+            <div key={k}>
+              <dt className="mono">{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
-  );
-};
+  </section>
+);
 
 export default About;

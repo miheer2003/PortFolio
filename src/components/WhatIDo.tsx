@@ -1,170 +1,70 @@
-import { useEffect, useRef } from "react";
 import "./styles/WhatIDo.css";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionHead from "./SectionHead";
 
-const WhatIDo = () => {
-  const containerRef = useRef<(HTMLDivElement | null)[]>([]);
-  const setRef = (el: HTMLDivElement | null, index: number) => {
-    containerRef.current[index] = el;
-  };
-  useEffect(() => {
-    if (ScrollTrigger.isTouch) {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.classList.remove("what-noTouch");
-          container.addEventListener("click", () => handleClick(container));
-        }
-      });
-    }
-    return () => {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.removeEventListener("click", () => handleClick(container));
-        }
-      });
-    };
-  }, []);
-  return (
-    <div className="whatIDO">
-      <div className="what-box">
-        <h2 className="title">
-          W<span className="hat-h2">HAT</span>
-          <div>
-            I<span className="do-h2"> DO</span>
-          </div>
-        </h2>
-      </div>
-      <div className="what-box">
-        <div className="what-box-in">
-          <div className="what-border2">
-            <svg width="100%">
-              <line
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="100%"
-                stroke="white"
-                strokeWidth="2"
-                strokeDasharray="7,7"
-              />
-              <line
-                x1="100%"
-                y1="0"
-                x2="100%"
-                y2="100%"
-                stroke="white"
-                strokeWidth="2"
-                strokeDasharray="7,7"
-              />
-            </svg>
-          </div>
-          <div
-            className="what-content what-noTouch"
-            ref={(el) => setRef(el, 0)}
-          >
-            <div className="what-border1">
-              <svg height="100%">
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="100%"
-                  y2="0"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-                <line
-                  x1="0"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
+const CAPABILITIES = [
+  {
+    no: "A",
+    title: "AI Engineering",
+    sub: "Intelligent systems & automation",
+    body: "AI-powered products built on LLMs, NLP, prompt engineering, RAG and agent workflows, designed to make software smarter and teams faster.",
+    tags: ["Python", "LangGraph", "LangChain", "MCP", "RAG", "AutoGen", "CrewAI", "TensorFlow", "PyTorch", "OpenCV"],
+  },
+  {
+    no: "B",
+    title: "Software Engineering",
+    sub: "Scalable full-stack applications",
+    body: "High-performance web applications with Java, Spring Boot, React, REST APIs and MySQL, with clean architecture and a strong focus on user experience.",
+    tags: ["Java", "Spring Boot", "React", "Node.js", "TypeScript", "MySQL", "Docker", "REST APIs", "AWS"],
+  },
+];
 
-            <div className="what-content-in">
-              <h3>SOFTWARE ENGINEERING</h3>
-              <h4>Scalable Full-Stack Applications</h4>
-              <p>
-                Designing high-performance web applications with Java, Spring Boot, React.js, REST APIs, and MySQL, emphasizing clean architecture, scalability, and exceptional user experiences.
-              </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">Java</div>
-                <div className="what-tags">Spring Boot</div>
-                <div className="what-tags">React.js</div>
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">MySQL</div>
-                <div className="what-tags">Docker</div>
-                <div className="what-tags">REST APIs</div>
-                <div className="what-tags">AWS</div>
-              </div>
-              <div className="what-arrow"></div>
-            </div>
-          </div>
-          <div
-            className="what-content what-noTouch"
-            ref={(el) => setRef(el, 1)}
-          >
-            <div className="what-border1">
-              <svg height="100%">
-                <line
-                  x1="0"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
-            <div className="what-content-in">
-              <h3>AI ENGINEERING</h3>
-              <h4>Intelligent Systems & Automation</h4>
-              <p>
-                Building AI-powered solutions using LLMs, NLP, prompt engineering, RAG, and intelligent workflows to deliver smarter, more efficient digital products.
-              </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">Python</div>
-                <div className="what-tags">TensorFlow</div>
-                <div className="what-tags">Keras</div>
-                <div className="what-tags">Scikit-learn</div>
-                <div className="what-tags">OpenCV</div>
-                <div className="what-tags">LangChain</div>
-                <div className="what-tags">AutoGen</div>
-                <div className="what-tags">NLP</div>
-              </div>
-              <div className="what-arrow"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+const fine = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+const onMove = (e: React.PointerEvent<HTMLElement>) => {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width;
+  const y = (e.clientY - r.top) / r.height;
+  el.style.setProperty("--mx", `${x * 100}%`);
+  el.style.setProperty("--my", `${y * 100}%`);
+  if (!fine()) return;
+  el.style.setProperty("--ry", `${(x - 0.5) * 14}deg`);
+  el.style.setProperty("--rx", `${(0.5 - y) * 10}deg`);
+};
+const onLeave = (e: React.PointerEvent<HTMLElement>) => {
+  e.currentTarget.style.setProperty("--rx", "0deg");
+  e.currentTarget.style.setProperty("--ry", "0deg");
 };
 
+const WhatIDo = () => (
+  <section className="section capabilities" id="capabilities">
+    <div className="wrap">
+      <SectionHead index="03" label="Capabilities" />
+      <h2 className="sec-title" data-reveal="lines">
+        What I <span className="serif accent-text">do</span>
+      </h2>
+
+      <div className="cap-grid" data-reveal="stagger">
+        {CAPABILITIES.map((c) => (
+          <div className="cap-cell" key={c.title}>
+            <article className="cap-card" onPointerMove={onMove} onPointerLeave={onLeave}>
+              <div className="cap-top">
+                <span className="mono cap-no">{c.no}</span>
+                <span className="mono">{c.sub}</span>
+              </div>
+              <h3 className="cap-title">{c.title}</h3>
+              <p className="cap-body">{c.body}</p>
+              <ul className="cap-tags">
+                {c.tags.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </article>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 export default WhatIDo;
-
-function handleClick(container: HTMLDivElement) {
-  container.classList.toggle("what-content-active");
-  container.classList.remove("what-sibling");
-  if (container.parentElement) {
-    const siblings = Array.from(container.parentElement.children);
-
-    siblings.forEach((sibling) => {
-      if (sibling !== container) {
-        sibling.classList.remove("what-content-active");
-        sibling.classList.toggle("what-sibling");
-      }
-    });
-  }
-}

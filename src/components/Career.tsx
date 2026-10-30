@@ -1,73 +1,96 @@
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import "./styles/Career.css";
+import SectionHead from "./SectionHead";
+import { prefersReducedMotion } from "./utils/lenis";
+
+gsap.registerPlugin(useGSAP);
+
+const ENTRIES = [
+  {
+    period: "Now",
+    role: "AI Engineer",
+    org: "Nutsovertech",
+    body: "Building AI-powered solutions that help businesses automate workflows and adopt AI at scale.",
+    current: true,
+  },
+  {
+    period: "2025 – 2026",
+    role: "PG-DAC, Advanced Computing",
+    org: "CDAC ACTS, Pune",
+    body: "Post Graduate Diploma in Advanced Computing (Aug 2025 – Jan 2026). Secured All India Rank (AIR) 23.",
+  },
+  {
+    period: "2025",
+    role: "Software Development Intern",
+    org: "Xpedio Live, Pune",
+    body: "Built a full-stack Doctor Management Application with React and Spring Boot. Designed 10+ REST APIs with optimised MySQL queries, cutting data load time by 35%.",
+  },
+  {
+    period: "2022 – 2025",
+    role: "B.Tech, Computer Engineering",
+    org: "MIT ADT University",
+    body: "First Class. Coursework in OOP, DSA, DBMS, Computer Networks, Software Engineering, Operating Systems and Web Development.",
+  },
+  {
+    period: "2019 – 2022",
+    role: "Diploma, Computer Science",
+    org: "Sandip Polytechnic, MSBTE",
+    body: "Graduated with 80.11%. Coursework in C, OOP (C++), Data Structures, Operating Systems, Computer Networks and Web Development.",
+  },
+];
 
 const Career = () => {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      gsap.fromTo(
+        ".exp-progress",
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".exp-list",
+            start: "top 70%",
+            end: "bottom 60%",
+            scrub: true,
+          },
+        }
+      );
+    },
+    { scope: rootRef }
+  );
+
   return (
-    <div className="career-section section-container">
-      <div className="career-container">
-        <h2>
-          My career <span>&</span>
-          <br /> experience
+    <section className="section experience" id="experience" ref={rootRef}>
+      <div className="wrap">
+        <SectionHead index="04" label="Experience & education" />
+        <h2 className="sec-title" data-reveal="lines">
+          The <span className="serif accent-text">journey</span> so far
         </h2>
-        <div className="career-info">
-          <div className="career-timeline">
-            <div className="career-dot"></div>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Diploma in Computer Science</h4>
-                <h5>Sandip Polytechnic, MSBTE</h5>
+
+        <ol className="exp-list">
+          <span className="exp-rail" aria-hidden="true">
+            <span className="exp-progress" />
+          </span>
+          {ENTRIES.map((e) => (
+            <li key={e.role} className={`exp-item ${e.current ? "is-current" : ""}`} data-reveal="fade">
+              <span className="exp-node" aria-hidden="true" />
+              <span className="mono exp-period">{e.period}</span>
+              <div className="exp-head">
+                <h3>{e.role}</h3>
+                <span className="exp-org">{e.org}</span>
               </div>
-              <h3>2019 – 2022</h3>
-            </div>
-            <p>
-              Graduated with 80.11%. Relevant coursework in Programming in C,
-              OOP (C++), Data Structures, Operating Systems, Computer Networks,
-              and Web Development.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>B.Tech in Computer Engineering</h4>
-                <h5>MIT ADT University</h5>
-              </div>
-              <h3>2022 – 2025</h3>
-            </div>
-            <p>
-              First Class. Coursework in OOP, DSA, DBMS, Computer Networks,
-              Software Engineering, Operating Systems, and Web Development.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Software Development Intern</h4>
-                <h5>Xpedio Live, Pune</h5>
-              </div>
-              <h3>2025</h3>
-            </div>
-            <p>
-              Built a full-stack Doctor Management Application using React.js
-              and Spring Boot. Designed 10+ RESTful APIs with optimised MySQL
-              queries, reducing data load time by 35%.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>PG-DAC in Advanced Computing</h4>
-                <h5>CDAC ACTS, Pune</h5>
-              </div>
-              <h3>NOW</h3>
-            </div>
-            <p>
-              Post Graduate Diploma in Advanced Computing (Aug 2025 – Jan 2026).
-            </p>
-          </div>
-        </div>
+              <p className="exp-body">{e.body}</p>
+            </li>
+          ))}
+        </ol>
       </div>
-    </div>
+    </section>
   );
 };
 

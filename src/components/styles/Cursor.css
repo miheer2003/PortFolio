@@ -1,33 +1,38 @@
-.cursor-main {
-  --size: 0px;
+.cursor-dot,
+.cursor-ring {
   position: fixed;
-  top: calc(var(--size) / -2);
-  left: calc(var(--size) / -2);
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50px;
+  left: 0;
+  top: 0;
+  z-index: 95;
   pointer-events: none;
-  z-index: 99;
-  background-color: #C9A96E;
-  box-shadow: 0px 0px 30px 0px rgb(175, 131, 255);
-  mix-blend-mode: difference;
-  transition: top 0.3s ease-out, left 0.3s ease-out, width 0.3s ease-out,
-    height 0.3s ease-out;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
 }
-.cursor-icons {
-  top: 10px;
-  left: 10px;
-  height: calc(var(--cursorH) - 20px);
-  transition: all 0.5s ease-out, height 0.5s ease-in-out;
+.cursor-dot.is-on,
+.cursor-ring.is-on {
+  opacity: 1;
 }
-.cursor-disable {
-  --size: 0px;
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--accent);
 }
-@media only screen and (min-width: 600px) {
-  .cursor-main {
-    --size: 50px;
-  }
-  .cursor-disable {
-    --size: 0px;
-  }
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 1px solid rgba(42, 26, 21, 0.35);
+  transition: opacity 0.3s var(--ease-out), width 0.5s var(--ease-out),
+    height 0.5s var(--ease-out), margin 0.5s var(--ease-out),
+    background-color 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
+}
+.cursor-ring.is-hover {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-color: transparent;
+  background: rgba(92, 23, 38, 0.1);
+  backdrop-filter: blur(2px);
 }

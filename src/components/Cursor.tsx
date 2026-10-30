@@ -1,54 +1,59 @@
 import { useEffect, useRef } from "react";
-import "./styles/Cursor.css";
 import gsap from "gsap";
+import "./styles/Cursor.css";
+
+const INTERACTIVE = "a, button, [role='button'], .work-item, .cap-card";
 
 const Cursor = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    let hover = false;
-    const cursor = cursorRef.current!;
-    const mousePos = { x: 0, y: 0 };
-    const cursorPos = { x: 0, y: 0 };
-    document.addEventListener("mousemove", (e) => {
-      mousePos.x = e.clientX;
-      mousePos.y = e.clientY;
-    });
-    requestAnimationFrame(function loop() {
-      if (!hover) {
-        const delay = 6;
-        cursorPos.x += (mousePos.x - cursorPos.x) / delay;
-        cursorPos.y += (mousePos.y - cursorPos.y) / delay;
-        gsap.to(cursor, { x: cursorPos.x, y: cursorPos.y, duration: 0.1 });
-        // cursor.style.transform = `translate(${cursorPos.x}px, ${cursorPos.y}px)`;
-      }
-      requestAnimationFrame(loop);
-    });
-    document.querySelectorAll("[data-cursor]").forEach((item) => {
-      const element = item as HTMLElement;
-      element.addEventListener("mouseover", (e: MouseEvent) => {
-        const target = e.currentTarget as HTMLElement;
-        const rect = target.getBoundingClientRect();
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
 
-        if (element.dataset.cursor === "icons") {
-          cursor.classList.add("cursor-icons");
+    document.documentElement.classList.add("has-cursor");
+    const dx = gsap.quickTo(dot, "x", { duration: 0.15, ease: "power3.out" });
+    const dy = gsap.quickTo(dot, "y", { duration: 0.15, ease: "power3.out" });
+    const rx = gsap.quickTo(ring, "x", { duration: 0.55, ease: "power3.out" });
+    const ry = gsap.quickTo(ring, "y", { duration: 0.55, ease: "power3.out" });
 
-          gsap.to(cursor, { x: rect.left, y: rect.top, duration: 0.1 });
-          //   cursor.style.transform = `translate(${rect.left}px,${rect.top}px)`;
-          cursor.style.setProperty("--cursorH", `${rect.height}px`);
-          hover = true;
-        }
-        if (element.dataset.cursor === "disable") {
-          cursor.classList.add("cursor-disable");
-        }
-      });
-      element.addEventListener("mouseout", () => {
-        cursor.classList.remove("cursor-disable", "cursor-icons");
-        hover = false;
-      });
-    });
+    const onMove = (e: PointerEvent) => {
+      dx(e.clientX);
+      dy(e.clientY);
+      rx(e.clientX);
+      ry(e.clientY);
+      ring.classList.add("is-on");
+      dot.classList.add("is-on");
+    };
+    const onOver = (e: PointerEvent) => {
+      const hit = (e.target as Element | null)?.closest?.(INTERACTIVE);
+      ring.classList.toggle("is-hover", Boolean(hit));
+    };
+    const onLeave = () => {
+      ring.classList.remove("is-on");
+      dot.classList.remove("is-on");
+    };
+
+    window.addEventListener("pointermove", onMove);
+    document.addEventListener("pointerover", onOver);
+    document.documentElement.addEventListener("pointerleave", onLeave);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerover", onOver);
+      document.documentElement.removeEventListener("pointerleave", onLeave);
+      document.documentElement.classList.remove("has-cursor");
+    };
   }, []);
 
-  return <div className="cursor-main" ref={cursorRef}></div>;
+  return (
+    <>
+      <div className="cursor-ring" ref={ringRef} aria-hidden="true" />
+      <div className="cursor-dot" ref={dotRef} aria-hidden="true" />
+    </>
+  );
 };
 
 export default Cursor;

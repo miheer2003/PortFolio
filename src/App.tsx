@@ -3,55 +3,45 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./App.css";
-
-const CharacterModel = lazy(() => import("./components/Character"));
-const MainContainer = lazy(() => import("./components/MainContainer"));
 import { LoadingProvider } from "./context/LoadingProvider";
+import { prefersReducedMotion, setLenis } from "./components/utils/lenis";
+
+const MainContainer = lazy(() => import("./components/MainContainer"));
+
+gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
+      lerp: prefersReducedMotion() ? 1 : 0.085,
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 1.4,
     });
+    lenis.stop(); // started by initialFX once the loader exits
+    setLenis(lenis);
 
-    // Synchronize Lenis scrolling with GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
-
-    // Use GSAP's ticker for the RAF loop so everything is perfectly in sync
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
+    lenis.on("scroll", ScrollTrigger.update);
+    const tick = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(tick);
       lenis.destroy();
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000);
-      });
+      setLenis(null);
     };
   }, []);
 
   return (
-    <>
-      <LoadingProvider>
-        <Suspense>
-          <MainContainer>
-            <Suspense>
-              <CharacterModel />
-            </Suspense>
-          </MainContainer>
-        </Suspense>
-      </LoadingProvider>
-    </>
+    <LoadingProvider>
+      <Suspense>
+        <MainContainer />
+      </Suspense>
+    </LoadingProvider>
   );
 };
 
