@@ -1,0 +1,132 @@
+.tw {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 10px 10px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 248, 231, 0.6);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 18px 40px -26px rgba(42, 26, 21, 0.45);
+}
+/* blank space under "Miheer", left */
+.tw-clock {
+  left: 0;
+  bottom: 8%;
+}
+/* blank space above "Jangale", right */
+.tw-you {
+  right: 0;
+  top: 6%;
+}
+
+.tw-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.tw-label {
+  font-size: 10px;
+  color: var(--text-mute);
+}
+.tw-time {
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.tw-sub {
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+/* analog dial */
+.tw-dial {
+  width: 44px;
+  height: 44px;
+  flex: none;
+}
+.tw-face {
+  fill: var(--bg-elev);
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+.tw-tick {
+  stroke: var(--text-mute);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.tw-hand {
+  stroke-linecap: round;
+}
+.tw-h {
+  stroke: var(--espresso);
+  stroke-width: 2.4;
+}
+.tw-m {
+  stroke: var(--espresso);
+  stroke-width: 1.6;
+}
+.tw-s {
+  stroke: var(--burgundy);
+  stroke-width: 0.8;
+}
+.tw-pin {
+  fill: var(--burgundy);
+}
+
+/* little rotating globe */
+.tw-globe {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elev);
+  overflow: hidden;
+}
+.tw-globe::before,
+.tw-globe::after,
+.tw-globe > span {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid var(--text-mute);
+}
+.tw-globe::before {
+  inset: 50% 3px auto;
+  height: 0;
+  border-width: 1px 0 0;
+  border-radius: 0;
+}
+.tw-globe > span {
+  inset: 4px 14px;
+  animation: tw-spin 6s linear infinite;
+}
+.tw-globe::after {
+  inset: 4px 8px;
+  animation: tw-spin 6s linear infinite -3s;
+}
+@keyframes tw-spin {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(0.05); }
+  100% { transform: scaleX(1); }
+}
+
+/* Only where the hero has room for them */
+@media (max-width: 1023px), (max-height: 640px) {
+  .tw {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tw-globe > span,
+  .tw-globe::after {
+    animation: none;
+  }
+}

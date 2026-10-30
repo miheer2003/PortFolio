@@ -151,14 +151,6 @@
   height: 136%;
   pointer-events: none;
 }
-.hero-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100% + 14px);
-  display: flex;
-  justify-content: space-between;
-}
 
 /* ---------- Footer row ---------- */
 .hero-foot {
@@ -242,9 +234,6 @@
   }
   .hero-line-1 { order: -1; margin-bottom: -6vw; }
   .hero-line-2 { order: 1; margin-top: -9vw; }
-  .hero-caption {
-    display: none;
-  }
   .hero-foot {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -261,5 +250,23 @@
     flex: 1;
     justify-content: center;
     padding: 0 14px;
+  }
+}
+
+/* Short laptop screens (1280x720, 1366x768) */
+@media (min-width: 821px) and (max-height: 800px) {
+  .hero-inner {
+    padding-top: 88px;
+    padding-bottom: 28px;
+    gap: 20px;
+  }
+  .hero-stage {
+    min-height: 0;
+  }
+  .hero-name {
+    font-size: min(15vw, 30vh);
+  }
+  .hero-photo {
+    --w: min(23vw, 40vh);
   }
 }

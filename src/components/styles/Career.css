@@ -87,3 +87,21 @@
     padding-top: 0;
   }
 }
+
+.exp-body {
+  margin: 0;
+}
+.exp-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 0;
+}
+.exp-tags li {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+}

@@ -272,6 +272,26 @@ const Certifications = () => {
     };
   }, [render, goTo]);
 
+  // Pointer-tracked tilt + glare on the front card's cover
+  const onCoverMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse") return;
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    el.style.setProperty("--mx", `${x * 100}%`);
+    el.style.setProperty("--my", `${y * 100}%`);
+    el.style.setProperty("--rx", `${(0.5 - y) * 10}deg`);
+    el.style.setProperty("--ry", `${(x - 0.5) * 14}deg`);
+    el.classList.add("is-hover");
+  };
+  const onCoverLeave = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    el.classList.remove("is-hover");
+    el.style.setProperty("--rx", "0deg");
+    el.style.setProperty("--ry", "0deg");
+  };
+
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
@@ -322,18 +342,20 @@ const Certifications = () => {
               onClick={() => i !== active && goTo(i)}
               aria-hidden={i !== active}
             >
-              <div className="cert-cover">
-                <img className="cert-cover-img" src={c.image} alt="" loading="lazy" draggable={false} />
-                <span className="cert-cover-grid" aria-hidden="true" />
-                <span className="cert-cover-sheen" aria-hidden="true" />
-                <div className="cert-cover-top mono">
-                  <span>No. {String(i + 1).padStart(2, "0")}</span>
-                  {c.badge ? <span className="cert-badge">{c.badge}</span> : <span>{c.year}</span>}
+              <div className="cert-cover" onPointerMove={i === active ? onCoverMove : undefined} onPointerLeave={onCoverLeave}>
+                <div className="cert-cover-in">
+                  <img className="cert-cover-img" src={c.image} alt={`${c.title} certificate`} loading="lazy" draggable={false} />
+                  <span className="cert-cover-glare" aria-hidden="true" />
+                  <div className="cert-cover-top mono">
+                    <span className="cert-chip">No. {String(i + 1).padStart(2, "0")}</span>
+                    {c.badge && <span className="cert-chip cert-badge">{c.badge}</span>}
+                  </div>
+                  {c.Icon && (
+                    <span className="cert-chip cert-issuer" aria-hidden="true">
+                      <c.Icon />
+                    </span>
+                  )}
                 </div>
-                <span className="cert-seal" aria-hidden="true">
-                  {c.Icon ? <c.Icon /> : <span className="cert-seal-text">ACTS</span>}
-                </span>
-                <span className="cert-code">{c.code}</span>
               </div>
               <div className="cert-body">
                 <div className="cert-meta mono">
@@ -341,7 +363,8 @@ const Certifications = () => {
                   <span>{c.year}</span>
                 </div>
                 <h3 className="cert-title" aria-label={c.title}>
-                  <span>{c.lead}</span> <span className="serif accent-text">{c.accent}</span>
+                  <span className="cert-word"><span>{c.lead}</span></span>{" "}
+                  <span className="cert-word serif"><span>{c.accent}</span></span>
                 </h3>
                 <p className="cert-desc">{c.description}</p>
               </div>

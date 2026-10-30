@@ -14,7 +14,7 @@ const CAPABILITIES = [
     title: "Software Engineering",
     sub: "Scalable full-stack applications",
     body: "High-performance web applications with Java, Spring Boot, React, REST APIs and MySQL, with clean architecture and a strong focus on user experience.",
-    tags: ["Java", "Spring Boot", "React", "Node.js", "TypeScript", "MySQL", "Docker", "REST APIs", "AWS"],
+    tags: ["Ruby on Rails", "Java", "Spring Boot", "React", "TypeScript", "PostgreSQL", "Docker", "REST APIs", "AWS"],
   },
 ];
 

@@ -10,9 +10,10 @@ gsap.registerPlugin(useGSAP);
 const ENTRIES = [
   {
     period: "Now",
-    role: "AI Engineer",
+    role: "AI Engineer · Ruby on Rails",
     org: "Nutsovertech",
-    body: "Building AI-powered solutions that help businesses automate workflows and adopt AI at scale.",
+    body: "Building LLM-powered features and agentic workflows, and handling Ruby on Rails projects end to end, from client requirements to production releases.",
+    tags: ["Gen AI", "Agents", "Ruby on Rails"],
     current: true,
   },
   {
@@ -85,7 +86,16 @@ const Career = () => {
                 <h3>{e.role}</h3>
                 <span className="exp-org">{e.org}</span>
               </div>
-              <p className="exp-body">{e.body}</p>
+              <div className="exp-text">
+                <p className="exp-body">{e.body}</p>
+                {"tags" in e && e.tags && (
+                  <ul className="exp-tags mono">
+                    {e.tags.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </li>
           ))}
         </ol>

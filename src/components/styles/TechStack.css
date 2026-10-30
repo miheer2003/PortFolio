@@ -1,45 +1,19 @@
 .stack-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
 }
 .stack-group {
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  gap: 32px;
-  padding: 28px 0;
+  padding: 22px 24px 24px;
+  border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
+.stack-group.is-wide {
+  grid-column: 1 / -1;
+}
 .stack-label {
-  padding-top: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-}
-.stack-label h3 {
-  margin: 0;
-}
-.stack-note {
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: var(--latte);
-  font-size: 10px;
-}
-.stack-mark {
-  width: 7px;
-  height: 7px;
-  border-radius: 2px;
-  background: var(--accent);
-  transform: rotate(45deg);
-  margin: 0 3px;
-}
-.stack-item.is-concept {
-  background: transparent;
-  border-style: dashed;
-  border-color: var(--line-strong);
-}
-.stack-group.is-genai .stack-item:not(.is-concept) {
-  background: var(--bg-elev-2);
+  margin: 0 0 14px;
 }
 .stack-items {
   list-style: none;
@@ -47,47 +21,57 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 .stack-item {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  height: 46px;
-  padding: 0 18px 0 14px;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px 0 12px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--bg-elev);
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: -0.01em;
-  transition: border-color 0.4s var(--ease-out), background-color 0.4s var(--ease-out),
-    transform 0.6s var(--ease-out);
+  transition: border-color 0.3s var(--ease-out), transform 0.4s var(--ease-out);
 }
 .stack-item svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: var(--text-dim);
-  transition: color 0.4s var(--ease-out);
+  transition: color 0.3s var(--ease-out);
 }
 .stack-item:hover {
-  border-color: rgba(92, 23, 38, 0.35);
-  background: var(--bg-elev-2);
+  border-color: var(--line-strong);
   transform: translateY(-2px);
 }
 .stack-item:hover svg {
   color: var(--accent);
 }
+.stack-item.is-concept {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--line-strong);
+}
+.stack-mark {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  margin: 0 2px;
+}
 
 @media (max-width: 760px) {
-  .stack-group {
+  .stack-groups {
     grid-template-columns: 1fr;
-    gap: 14px;
   }
-  .stack-label {
-    padding-top: 0;
+  .stack-group {
+    padding: 18px 16px 20px;
   }
   .stack-item {
-    height: 40px;
-    font-size: 14px;
+    height: 34px;
+    font-size: 13px;
   }
 }

@@ -67,9 +67,11 @@ const MainContainer = () => {
       });
 
       gsap.utils.toArray<HTMLElement>("[data-reveal='fade']").forEach((el) => {
+        gsap.set(el, { transition: "none" });
         gsap.from(el, {
           autoAlpha: 0,
           y: 32,
+          clearProps: "transition",
           duration: 1.2,
           ease: "expo.out",
           scrollTrigger: { trigger: el, start, once: true },
@@ -77,9 +79,12 @@ const MainContainer = () => {
       });
 
       gsap.utils.toArray<HTMLElement>("[data-reveal='stagger']").forEach((el) => {
+        // CSS transitions on these elements would fight the tween; mute them until it finishes.
+        gsap.set(el.children, { transition: "none" });
         gsap.from(el.children, {
           autoAlpha: 0,
           y: 28,
+          clearProps: "transition",
           duration: 1.1,
           ease: "expo.out",
           stagger: 0.06,

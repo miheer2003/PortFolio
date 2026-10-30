@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { MdArrowOutward, MdArrowDownward } from "react-icons/md";
 import "./styles/Landing.css";
+import TimeWidgets from "./TimeWidgets";
 import { prefersReducedMotion, scrollToTarget } from "./utils/lenis";
 
 gsap.registerPlugin(useGSAP);
@@ -149,17 +150,15 @@ const Landing = () => {
                 <HeroPortrait src={PORTRAIT} onReady={onReady} />
               </Suspense>
             )}
-            <figcaption className="mono hero-caption" data-hero-fade>
-              <span>(Fig. 01)</span>
-              <span>Pune, 2026</span>
-            </figcaption>
           </figure>
+
+          <TimeWidgets />
         </div>
 
         <div className="hero-foot">
           <p className="hero-lead" data-hero-fade>
             I build intelligent software, from full-stack products in{" "}
-            <span className="hero-em">Java &amp; React</span> to{" "}
+            <span className="hero-em">Rails &amp; React</span> to{" "}
             <span className="serif hero-serif">LLM-powered</span> systems that ship.
           </p>
 
