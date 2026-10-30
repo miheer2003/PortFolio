@@ -110,19 +110,85 @@
   transform: scale(1);
   opacity: 1;
 }
-.work-preview img {
-  position: absolute;
-  inset: 0;
+/* ---------- Shared duotone cover ---------- */
+.work-cover {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--espresso);
+}
+.work-cover img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transform: scale(1.15);
-  transition: opacity 0.5s var(--ease-out), transform 1s var(--ease-out);
+  filter: grayscale(1) contrast(1.1) brightness(1.05);
+  mix-blend-mode: luminosity;
+  opacity: 0.9;
 }
-.work-preview img.is-current {
-  opacity: 1;
+.work-cover::before {
+  /* warm duotone: burgundy shadows, latte highlights */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(160deg, rgba(255, 248, 231, 0.55), rgba(164, 120, 100, 0.25) 45%, rgba(92, 23, 38, 0.85));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.work-cover::after {
+  /* fine grid + vignette */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image:
+    radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(42, 26, 21, 0.55)),
+    linear-gradient(rgba(255, 248, 231, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 248, 231, 0.08) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px;
+  pointer-events: none;
+}
+.work-cover-tag {
+  position: absolute;
+  z-index: 3;
+  left: 12px;
+  bottom: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--latte);
+  background: rgba(42, 26, 21, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* preview stack: wipe the current image in from below */
+.work-preview .work-cover {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.9s var(--ease-out);
+}
+.work-preview .work-cover img {
+  transform: scale(1.25);
+  transition: transform 1.2s var(--ease-out);
+}
+.work-preview .work-cover.is-current {
+  clip-path: inset(0 0 0 0);
+  z-index: 1;
+}
+.work-preview .work-cover.is-current img {
   transform: scale(1);
+}
+.work-preview-label {
+  position: absolute;
+  z-index: 5;
+  inset: auto 14px 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--latte);
+}
+.work-preview-in {
+  border: 1px solid rgba(255, 248, 231, 0.2);
 }
 
 /* ---------- Touch / small screens ---------- */
@@ -153,7 +219,6 @@
     display: block;
     width: 100%;
     aspect-ratio: 16 / 10;
-    object-fit: cover;
     border-radius: 12px;
     margin-top: 10px;
   }

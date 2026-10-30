@@ -10,6 +10,7 @@ import Contact from "./Contact";
 import Cursor from "./Cursor";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
+import Quote from "./Quote";
 import TechStack from "./TechStack";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
@@ -98,6 +99,7 @@ const MainContainer = () => {
       <Work />
       <WhatIDo />
       <Career />
+      <Quote />
       <TechStack />
       <Certifications />
       <Contact />

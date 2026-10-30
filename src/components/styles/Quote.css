@@ -1,0 +1,60 @@
+.quote {
+  position: relative;
+  padding: clamp(120px, 18vw, 260px) 0;
+  overflow: hidden;
+}
+.quote-in {
+  position: relative;
+  text-align: center;
+}
+.quote-mark {
+  position: absolute;
+  left: 50%;
+  top: -0.32em;
+  translate: -50% 0;
+  font-size: clamp(260px, 34vw, 560px);
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+}
+.quote-text {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.24em;
+  font-size: clamp(54px, 10.5vw, 188px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  font-weight: 500;
+  perspective: 1000px;
+}
+.quote-word {
+  display: inline-flex;
+  padding-bottom: 0.12em;
+  transform-style: preserve-3d;
+}
+.quote-word.serif {
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  padding-right: 0.06em;
+}
+.quote-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+.quote-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: clamp(24px, 3vw, 40px);
+}
+.quote-rule {
+  width: 56px;
+  height: 1px;
+  background: var(--line-strong);
+}

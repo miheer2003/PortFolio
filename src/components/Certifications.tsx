@@ -2,6 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
+import { FaAws } from "react-icons/fa6";
+import { SiInfosys, SiUdemy } from "react-icons/si";
+import type { IconType } from "react-icons";
 import "./styles/Certifications.css";
 import SectionHead from "./SectionHead";
 import { prefersReducedMotion } from "./utils/lenis";
@@ -10,9 +13,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const img = (name: string) => `${import.meta.env.BASE_URL}images/certifications/${name}`;
 
-const CERTS = [
+type Cert = {
+  title: string;
+  lead: string;
+  accent: string;
+  code: string;
+  issuer: string;
+  year: string;
+  image: string;
+  description: string;
+  badge?: string;
+  Icon?: IconType;
+};
+
+const CERTS: Cert[] = [
   {
     title: "PG-DAC",
+    lead: "Advanced",
+    accent: "Computing",
+    code: "PG—DAC",
     issuer: "CDAC ACTS, Pune",
     year: "2025",
     image: img("pg-dac.png"),
@@ -21,6 +40,10 @@ const CERTS = [
   },
   {
     title: "AWS Cloud Practitioner",
+    lead: "Cloud",
+    accent: "Practitioner",
+    code: "AWS · CLF",
+    Icon: FaAws,
     issuer: "Amazon Web Services",
     year: "2024",
     image: img("aws-cloud-foundations.png"),
@@ -28,6 +51,10 @@ const CERTS = [
   },
   {
     title: "AWS Developer Associate",
+    lead: "Developer",
+    accent: "Associate",
+    code: "AWS · DVA",
+    Icon: FaAws,
     issuer: "Amazon Web Services",
     year: "2024",
     image: img("aws-developer.jpg"),
@@ -35,6 +62,10 @@ const CERTS = [
   },
   {
     title: "ML with Python",
+    lead: "Machine",
+    accent: "Learning",
+    code: "ML · PY",
+    Icon: SiUdemy,
     issuer: "Udemy",
     year: "2023",
     image: img("machine-learning.jpg"),
@@ -42,6 +73,10 @@ const CERTS = [
   },
   {
     title: "Database Management",
+    lead: "Database",
+    accent: "Systems",
+    code: "DBMS",
+    Icon: SiInfosys,
     issuer: "Infosys",
     year: "2023",
     image: img("database-management.jpg"),
@@ -49,6 +84,10 @@ const CERTS = [
   },
   {
     title: "Advanced JavaScript",
+    lead: "Advanced",
+    accent: "JavaScript",
+    code: "JS · ES6+",
+    Icon: SiInfosys,
     issuer: "Infosys",
     year: "2023",
     image: img("javascript.jpg"),
@@ -56,6 +95,10 @@ const CERTS = [
   },
   {
     title: "Web Dev Bootcamp",
+    lead: "Web Dev",
+    accent: "Bootcamp",
+    code: "WEB · FS",
+    Icon: SiUdemy,
     issuer: "Udemy",
     year: "2022",
     image: img("web-dev.jpg"),
@@ -95,6 +138,7 @@ const Certifications = () => {
       card.style.zIndex = String(100 - Math.round(a * 10));
       card.style.opacity = String(a > 3.4 ? 0 : 1 - Math.max(a - 2.4, 0));
       card.style.setProperty("--shade", String(Math.min(a, 2) * 0.22));
+      card.style.setProperty("--o", o.toFixed(3));
       card.style.pointerEvents = a > 3.4 ? "none" : "auto";
     });
 
@@ -244,7 +288,7 @@ const Certifications = () => {
         <SectionHead index="06" label="Certifications" />
         <div className="cert-head">
           <h2 className="sec-title" data-reveal="lines">
-            Always <span className="serif accent-text">learning</span>
+            Proof of <span className="serif accent-text">practice</span>
           </h2>
           <div className="cert-controls">
             <span className="mono cert-count">
@@ -278,16 +322,29 @@ const Certifications = () => {
               onClick={() => i !== active && goTo(i)}
               aria-hidden={i !== active}
             >
-              <div className="cert-media">
-                <img src={c.image} alt={`${c.title} certificate`} loading="lazy" draggable={false} />
-                {c.badge && <span className="cert-badge mono">{c.badge}</span>}
+              <div className="cert-cover">
+                <img className="cert-cover-img" src={c.image} alt="" loading="lazy" draggable={false} />
+                <span className="cert-cover-grid" aria-hidden="true" />
+                <span className="cert-cover-sheen" aria-hidden="true" />
+                <div className="cert-cover-top mono">
+                  <span>No. {String(i + 1).padStart(2, "0")}</span>
+                  {c.badge ? <span className="cert-badge">{c.badge}</span> : <span>{c.year}</span>}
+                </div>
+                <span className="cert-seal" aria-hidden="true">
+                  {c.Icon ? <c.Icon /> : <span className="cert-seal-text">ACTS</span>}
+                </span>
+                <span className="cert-code">{c.code}</span>
               </div>
-              <div className="cert-meta mono">
-                <span>{c.issuer}</span>
-                <span>{c.year}</span>
+              <div className="cert-body">
+                <div className="cert-meta mono">
+                  <span>{c.issuer}</span>
+                  <span>{c.year}</span>
+                </div>
+                <h3 className="cert-title" aria-label={c.title}>
+                  <span>{c.lead}</span> <span className="serif accent-text">{c.accent}</span>
+                </h3>
+                <p className="cert-desc">{c.description}</p>
               </div>
-              <h3 className="cert-title">{c.title}</h3>
-              <p className="cert-desc">{c.description}</p>
             </li>
           ))}
         </ul>

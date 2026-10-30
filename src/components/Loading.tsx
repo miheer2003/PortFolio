@@ -61,13 +61,13 @@ const Loading = ({ onDone }: { onDone: () => void }) => {
       // word cycle
       // word cycle: plays once and lands on the name
       const words = gsap.utils.toArray<HTMLElement>(".loader-word", root);
-      gsap.set(words, { yPercent: (i) => (i === 0 ? 0 : 130) });
+      gsap.set(words, { yPercent: (i) => (i === 0 ? 0 : 130), autoAlpha: (i) => (i === 0 ? 1 : 0) });
       const wordTl = gsap.timeline({ paused: quick });
       words.forEach((w, i) => {
         if (i === words.length - 1) return;
         wordTl
-          .to(w, { yPercent: -130, duration: 0.55, ease: "expo.inOut" }, i * 0.6 + 0.45)
-          .to(words[i + 1], { yPercent: 0, duration: 0.55, ease: "expo.inOut" }, "<");
+          .to(w, { yPercent: -130, autoAlpha: 0, duration: 0.55, ease: "expo.inOut" }, i * 0.6 + 0.45)
+          .to(words[i + 1], { yPercent: 0, autoAlpha: 1, duration: 0.55, ease: "expo.inOut" }, "<");
       });
 
       const fill = gsap.to(counter, {
@@ -91,8 +91,8 @@ const Loading = ({ onDone }: { onDone: () => void }) => {
           const tl = gsap.timeline({ onComplete: onDone });
           tl.to(counter, { v: 100, duration: 0.5, ease: "power2.out", onUpdate: setDigits })
             .to(".loader-bar-fill", { scaleX: 1, duration: 0.5, ease: "power2.out" }, "<")
-            .to(shown, { yPercent: -130, duration: 0.5, ease: "expo.inOut" }, "<")
-            .to(last, { yPercent: 0, duration: 0.5, ease: "expo.inOut" }, "<")
+            .to(shown, { yPercent: -130, autoAlpha: 0, duration: 0.5, ease: "expo.inOut" }, "<")
+            .to(last, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "expo.inOut" }, "<")
             .to(".loader-row > *", { yPercent: -120, duration: 0.7, ease: "expo.in", stagger: 0.04 }, "+=0.25")
             .to(".loader-bar", { scaleX: 0, transformOrigin: "right center", duration: 0.6, ease: "expo.in" }, "<")
             .to(".loader-col", { yPercent: -100, duration: 1.1, ease: "expo.inOut", stagger: { each: 0.06, from: "center" } }, "-=0.2")

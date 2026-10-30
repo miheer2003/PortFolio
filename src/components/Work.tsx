@@ -61,13 +61,17 @@ const Work = () => {
       const xTo = gsap.quickTo(preview, "x", { duration: 0.7, ease: "power3.out" });
       const yTo = gsap.quickTo(preview, "y", { duration: 0.7, ease: "power3.out" });
       const rTo = gsap.quickTo(preview, "rotation", { duration: 0.9, ease: "power3.out" });
+      const ryTo = gsap.quickTo(preview, "rotationY", { duration: 0.9, ease: "power3.out" });
+      gsap.set(preview, { transformPerspective: 900 });
       let lastX = 0;
 
       const onMove = (e: Event) => {
         const { clientX, clientY } = e as PointerEvent;
         xTo(clientX);
         yTo(clientY);
-        rTo(gsap.utils.clamp(-8, 8, (clientX - lastX) * 0.4));
+        const v = clientX - lastX;
+        rTo(gsap.utils.clamp(-6, 6, v * 0.3));
+        ryTo(gsap.utils.clamp(-22, 22, v * 1.2));
         lastX = clientX;
       };
       list.addEventListener("pointermove", onMove);
@@ -107,7 +111,12 @@ const Work = () => {
                   <span className="work-arrow" aria-hidden="true">
                     {p.link ? <MdArrowOutward /> : null}
                   </span>
-                  <img className="work-thumb" src={p.image} alt="" loading="lazy" />
+                  <span className="work-thumb work-cover">
+                    <img src={p.image} alt="" loading="lazy" />
+                    <span className="work-cover-tag mono">
+                      {String(i + 1).padStart(2, "0")} · {p.kind}
+                    </span>
+                  </span>
                 </Tag>
               </li>
             );
@@ -122,14 +131,14 @@ const Work = () => {
       >
         <div className="work-preview-in">
           {PROJECTS.map((p, i) => (
-            <img
-              key={p.title}
-              src={p.image}
-              alt=""
-              loading="lazy"
-              className={hovered === i ? "is-current" : ""}
-            />
+            <div key={p.title} className={`work-cover ${hovered === i ? "is-current" : ""}`}>
+              <img src={p.image} alt="" loading="lazy" />
+            </div>
           ))}
+          <div className="work-preview-label mono">
+            <span>{hovered !== null ? String(hovered + 1).padStart(2, "0") : ""}</span>
+            <span>{hovered !== null ? PROJECTS[hovered].kind : ""}</span>
+          </div>
         </div>
       </div>
     </section>

@@ -142,7 +142,7 @@ const Landing = () => {
               alt="Portrait of Miheer Jangale"
               width={848}
               height={1060}
-              fetchPriority="high"
+              {...{ fetchpriority: "high" }}
             />
             {motion && (
               <Suspense fallback={null}>
