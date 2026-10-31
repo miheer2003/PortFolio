@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import "./styles/Cursor.css";
 
-const INTERACTIVE = "a, button, [role='button'], .work-item, .cap-card, .orbit-chip, .about-net";
+const INTERACTIVE = "a, button, [role='button'], .work-item, .cap-card, .about-net";
 
 const Cursor = () => {
   const dotRef = useRef<HTMLDivElement>(null);

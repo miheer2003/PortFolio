@@ -25,7 +25,7 @@ import {
 import "./styles/TechStack.css";
 import SectionHead from "./SectionHead";
 import { StarDock } from "./ScrollStar";
-import StackOrbit, { type OrbitItem } from "./StackOrbit";
+import StackKeys, { type KeyTool } from "./StackKeys";
 
 type Tech = { name: string; Icon?: IconType };
 type Group = { label: string; items: Tech[]; concept?: boolean; wide?: boolean };
@@ -88,8 +88,8 @@ const GROUPS: Group[] = [
   },
 ];
 
-// Every tool with an icon also sits on the sphere.
-const ORBIT: OrbitItem[] = GROUPS.flatMap((g) => g.items).flatMap((t) => (t.Icon ? [{ name: t.name, Icon: t.Icon }] : []));
+// Every tool also gets a key on the board (with its group for the display).
+const TOOLS: KeyTool[] = GROUPS.flatMap((g) => g.items.map((t) => ({ name: t.name, group: g.label, Icon: t.Icon })));
 
 const TechStack = () => (
   <section className="section stack" id="stack">
@@ -99,7 +99,7 @@ const TechStack = () => (
         <h2 className="sec-title" data-reveal="lines">
           Tools I <StarDock before={<span className="serif accent-text">trust</span>} />
         </h2>
-        <StackOrbit items={ORBIT} />
+        <StackKeys tools={TOOLS} />
       </div>
 
       <div className="stack-groups">

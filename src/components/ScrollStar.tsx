@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useLoading } from "../context/LoadingProvider";
 import { prefersReducedMotion } from "./utils/lenis";
+import { STAR_HANDOFF } from "./utils/star";
+import StarGlyph from "./StarGlyph";
 import "./styles/ScrollStar.css";
 
 /**
@@ -39,10 +41,11 @@ const ease = (t: number) => {
 const ScrollStar = () => {
   const { isLoading } = useLoading();
   const starRef = useRef<HTMLDivElement>(null);
+  const startRef = useRef<((handoff: boolean) => void) | null>(null);
 
   useEffect(() => {
     const star = starRef.current;
-    if (!star || isLoading || prefersReducedMotion()) return;
+    if (!star || prefersReducedMotion()) return;
 
     const cur = { x: 0, y: 0, s: 1, r: 0 };
     let first = true;
@@ -107,40 +110,36 @@ const ScrollStar = () => {
       star.style.setProperty("--tilt", `${Math.max(-40, Math.min(40, v * 1.2)).toFixed(1)}deg`);
     };
 
-    gsap.ticker.add(tick);
-    star.classList.add("is-on");
-    return () => {
-      gsap.ticker.remove(tick);
-      star.classList.remove("is-on");
+    // Starts when the loader's star lands on the hero dock (same frame, above the loader),
+    // or when loading ends without a hand-off.
+    let started = false;
+    startRef.current = (handoff) => {
+      if (started) return;
+      started = true;
+      if (handoff) star.classList.add("is-instant", "is-lift");
+      tick();
+      gsap.ticker.add(tick);
+      star.classList.add("is-on");
     };
+    const onHandoff = () => startRef.current?.(true);
+    window.addEventListener(STAR_HANDOFF, onHandoff);
+    return () => {
+      window.removeEventListener(STAR_HANDOFF, onHandoff);
+      gsap.ticker.remove(tick);
+      star.classList.remove("is-on", "is-instant", "is-lift");
+      startRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) return;
+    startRef.current?.(false);
+    starRef.current?.classList.remove("is-lift");
   }, [isLoading]);
 
   return (
     <div className="scroll-star" ref={starRef} aria-hidden="true">
-      <svg className="scroll-star-ring" viewBox="0 0 100 100">
-        <ellipse cx="50" cy="50" rx="47" ry="17" />
-      </svg>
-      <svg className="scroll-star-body" viewBox="0 0 100 100">
-        <defs>
-          <radialGradient id="ss-fill" cx="0.36" cy="0.3" r="0.8">
-            <stop offset="0" stopColor="#fffaf0" />
-            <stop offset="0.3" stopColor="#ecd2b2" />
-            <stop offset="0.7" stopColor="#a47864" />
-            <stop offset="1" stopColor="#5c1726" />
-          </radialGradient>
-          <linearGradient id="ss-edge" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#fff8e7" />
-            <stop offset="1" stopColor="#5c1726" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M50 2 C54 34 66 46 98 50 C66 54 54 66 50 98 C46 66 34 54 2 50 C34 46 46 34 50 2Z"
-          fill="url(#ss-fill)"
-          stroke="url(#ss-edge)"
-          strokeWidth="1.2"
-        />
-        <path d="M50 12 C52 34 58 42 70 46 C58 44 52 38 50 12Z" fill="#fff" opacity="0.7" />
-      </svg>
+      <StarGlyph id="ss" />
     </div>
   );
 };

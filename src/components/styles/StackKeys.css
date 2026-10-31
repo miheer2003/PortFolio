@@ -1,0 +1,71 @@
+/* Laptops: the board floats across the section rule, in the gap above it, so it adds
+   no height. Phones: it sits full-bleed under the title. */
+.stack .wrap {
+  position: relative;
+}
+.keys {
+  --kw: clamp(400px, 44vw, 640px);
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--kw) / 1.7 * -0.4);
+  right: var(--pad);
+  width: var(--kw);
+}
+.keys-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.7;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+.keys-hint {
+  margin-top: -2px;
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--text-mute);
+  white-space: nowrap;
+}
+.keys-hint .for-touch {
+  display: none;
+}
+@media (hover: none), (pointer: coarse) {
+  .keys-hint .for-fine {
+    display: none;
+  }
+  .keys-hint .for-touch {
+    display: inline;
+  }
+}
+
+/* The chip whose key is down */
+.stack-item.is-hot {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.stack-item.is-hot svg {
+  color: var(--accent);
+}
+
+/* Portrait tablets and phones: the board sits under the title. */
+@media (max-width: 860px) {
+  .stack-head {
+    display: grid;
+    margin-bottom: clamp(20px, 5vw, 32px);
+  }
+  .stack-head .sec-title {
+    margin-bottom: 4px;
+  }
+  .keys {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(100%, 600px);
+    margin: 0 auto;
+  }
+}
+@media (max-width: 760px) {
+  .keys {
+    width: auto;
+    margin: 0 calc(var(--pad) * -1);
+  }
+}
