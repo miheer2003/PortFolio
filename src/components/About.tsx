@@ -1,5 +1,38 @@
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import "./styles/About.css";
 import SectionHead from "./SectionHead";
+
+const AboutNet = lazy(() => import("./AboutNet"));
+
+/** Loads the WebGL network only when About gets close to the screen. */
+const NetSlot = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        setOn(true);
+        io.disconnect();
+      },
+      { rootMargin: "600px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div className="about-net" ref={ref} aria-hidden="true">
+      {on && (
+        <Suspense fallback={null}>
+          <AboutNet />
+        </Suspense>
+      )}
+      <span className="mono about-net-hint">Click to fire</span>
+    </div>
+  );
+};
 
 const FACTS = [
   { k: "Role", v: "AI Engineer, Nutsovertech" },
@@ -13,11 +46,14 @@ const About = () => (
     <div className="wrap">
       <SectionHead index="01" label="About" />
 
-      <p className="about-statement" data-reveal="lines">
-        I'm Miheer, an AI Engineer at Nutsovertech. I build LLM-powered
-        products and handle Ruby on Rails projects, combining clean
-        engineering with AI to ship software that is fast and useful.
-      </p>
+      <div className="about-lead">
+        <p className="about-statement" data-reveal="lines">
+          I'm Miheer, an AI Engineer at Nutsovertech. I build LLM-powered
+          products and handle Ruby on Rails projects, combining clean
+          engineering with AI to ship software that is fast and useful.
+        </p>
+        <NetSlot />
+      </div>
 
       <div className="about-grid">
         <p className="about-body" data-reveal="fade">

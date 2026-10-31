@@ -1,4 +1,10 @@
+.about-lead {
+  position: relative;
+  display: flex;
+  gap: clamp(20px, 3vw, 56px);
+}
 .about-statement {
+  flex: 0 1 auto;
   max-width: 22ch;
   font-size: clamp(32px, 4.6vw, 76px);
   line-height: 1.04;
@@ -59,5 +65,56 @@
   }
   .about-facts > div:nth-child(odd) {
     padding-right: 0;
+  }
+}
+
+/* ---------- WebGL network in the space beside the statement ---------- */
+.about-net {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.about-net-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease-out);
+}
+.about-net-canvas.is-ready {
+  opacity: 1;
+}
+.about-net-hint {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  font-size: 10.5px;
+  color: var(--text-mute);
+  white-space: nowrap;
+  pointer-events: none;
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .about-net-hint {
+    display: none;
+  }
+}
+/* Phones: the statement fills the width, so the network becomes faint art behind it. */
+@media (max-width: 760px) {
+  .about-lead {
+    display: block;
+    isolation: isolate;
+  }
+  .about-net {
+    position: absolute;
+    z-index: -1;
+    top: -10%;
+    right: calc(var(--pad) * -1);
+    width: 74%;
+    height: 120%;
+    opacity: 0.3;
+    pointer-events: none;
   }
 }

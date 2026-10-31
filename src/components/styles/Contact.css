@@ -51,6 +51,16 @@
   font-weight: 500;
 }
 
+/* "intelligent." letters: single unbreakable word, each letter turns in 3D */
+.contact-word {
+  white-space: nowrap;
+}
+.tl-ch {
+  display: inline-block;
+  transform-origin: 50% 60%;
+  backface-visibility: hidden;
+}
+
 .contact-actions {
   display: flex;
   flex-wrap: wrap;

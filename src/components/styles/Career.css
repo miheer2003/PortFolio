@@ -21,14 +21,19 @@
 
 .exp-item {
   position: relative;
-  display: grid;
-  grid-template-columns: 160px minmax(0, 1fr) minmax(0, 1fr);
-  gap: 32px;
   padding: clamp(28px, 3vw, 44px) 0;
   border-top: 1px solid var(--line);
+  /* each card turns on its own drum; the rule and the node stay flat */
+  perspective: 1100px;
 }
 .exp-item:last-child {
   border-bottom: 1px solid var(--line);
+}
+.exp-card {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  transform-origin: 50% 50%;
 }
 .exp-node {
   position: absolute;
@@ -79,7 +84,7 @@
   .exp-node {
     left: -28px;
   }
-  .exp-item {
+  .exp-card {
     grid-template-columns: 1fr;
     gap: 12px;
   }
@@ -104,4 +109,44 @@
   border-radius: 999px;
   border: 1px solid var(--line-strong);
   color: var(--text);
+}
+
+/* ---------- Rolodex: playhead, passed nodes, focus ---------- */
+.exp-tip {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(92, 23, 38, 0.12), 0 0 18px 2px rgba(92, 23, 38, 0.35);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.exp-node {
+  transition: transform 0.6s var(--ease-out), background-color 0.5s var(--ease-out),
+    border-color 0.5s var(--ease-out), box-shadow 0.6s var(--ease-out);
+}
+.exp-item.is-passed .exp-node {
+  border-color: var(--accent);
+}
+.exp-item.is-focus .exp-node {
+  transform: scale(1.3);
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(92, 23, 38, 0.12);
+}
+.exp-period {
+  transition: color 0.5s var(--ease-out);
+}
+.exp-item.is-focus .exp-period {
+  color: var(--accent);
+}
+.exp-card > * {
+  transition: opacity 0.6s var(--ease-out);
+}
+.experience.is-3d .exp-list.has-focus .exp-item:not(.is-focus) .exp-card > * {
+  opacity: 0.4;
 }

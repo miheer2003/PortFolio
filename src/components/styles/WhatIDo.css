@@ -10,8 +10,6 @@
 .cap-card {
   --mx: 50%;
   --my: 50%;
-  --rx: 0deg;
-  --ry: 0deg;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -21,10 +19,9 @@
   border-radius: var(--radius);
   border: 1px solid var(--line);
   background: var(--bg-elev);
-  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  /* the tilt is set from JS every frame (already smoothed), so no transform transition */
   transform-style: preserve-3d;
-  transition: transform 0.8s var(--ease-out), border-color 0.6s var(--ease-out),
-    box-shadow 0.8s var(--ease-out);
+  transition: border-color 0.6s var(--ease-out), box-shadow 0.8s var(--ease-out);
 }
 .cap-card::before {
   /* cursor spotlight */
@@ -49,18 +46,49 @@
 .cap-card:hover::before {
   opacity: 1;
 }
-/* Layered depth inside the tilted card */
-.cap-top { transform: translateZ(20px); }
-.cap-title { transform: translateZ(60px); }
-.cap-body { transform: translateZ(36px); }
-.cap-tags { transform: translateZ(28px); }
+/* Layered depth inside the tilted card. Everything sits in front of the card face
+   (z > 0); the letter stays behind the text. */
+.cap-top { transform: translateZ(40px); }
+.cap-title { transform: translateZ(76px); }
+.cap-body { transform: translateZ(50px); }
+.cap-tags { transform: translateZ(44px); transform-style: preserve-3d; }
+
+/* Giant extruded index letter */
+.cap-glyph {
+  /* straddles the card's top edge, like the Stack sphere straddles its rule */
+  --gf: clamp(140px, 13vw, 210px);
+  position: absolute;
+  top: calc(var(--gf) * -0.36);
+  right: clamp(22px, 2.6vw, 40px);
+  transform-style: preserve-3d;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--gf);
+  line-height: 0.74;
+  pointer-events: none;
+  user-select: none;
+}
+.cap-glyph > span {
+  display: block;
+  transform: translateZ(var(--z));
+}
+.cap-glyph-side {
+  position: absolute;
+  inset: 0;
+}
+.cap-glyph-face {
+  position: relative;
+  color: var(--latte);
+  -webkit-text-stroke: 1px rgba(164, 120, 100, 0.55);
+}
 
 .cap-top {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: 16px;
 }
 .cap-no {
+  flex: none;
   display: grid;
   place-items: center;
   width: 32px;
@@ -98,20 +126,41 @@
   font-size: 13px;
   color: var(--text);
   background: rgba(255, 248, 231, 0.6);
-  transition: border-color 0.4s var(--ease-out);
+  transition: border-color 0.4s var(--ease-out), color 0.4s var(--ease-out),
+    background-color 0.4s var(--ease-out), box-shadow 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
 }
 .cap-card:hover .cap-tags li {
   border-color: var(--line-strong);
+}
+@media (hover: hover) and (pointer: fine) {
+  .cap-card .cap-tags li:hover {
+    transform: translateZ(26px) translateY(-2px);
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--latte);
+    box-shadow: 0 14px 24px -14px rgba(42, 26, 21, 0.45);
+  }
 }
 
 @media (max-width: 900px) {
   .cap-grid {
     grid-template-columns: 1fr;
+    /* room for the next card's letter, which rises above its top edge */
+    gap: 40px;
   }
   .cap-card {
     min-height: 0;
   }
   .cap-title {
     padding-top: 48px;
+  }
+  .cap-glyph {
+    --gf: 124px;
+    top: calc(var(--gf) * -0.22);
+  }
+  /* keep the sub-label clear of the letter */
+  .cap-top > .mono:last-child {
+    max-width: 58%;
   }
 }

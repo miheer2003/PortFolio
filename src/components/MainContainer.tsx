@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -20,6 +20,7 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import { prefersReducedMotion } from "./utils/lenis";
 import ScrollStar from "./ScrollStar";
+import { initMagnetic } from "./utils/magnetic";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
@@ -32,6 +33,8 @@ gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
  */
 const MainContainer = () => {
   const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => initMagnetic(), []);
 
   useGSAP(
     () => {
