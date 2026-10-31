@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import type { GithubData } from "../../api/github";
 import { EMAIL, GH, LINKEDIN, PROJECTS, RESUME } from "../data/profile";
 import { openCoffee } from "./utils/coffee";
+import { getGithub } from "./utils/github";
 import { getLenis, scrollToTarget } from "./utils/lenis";
 import { TERMINAL_EVENT } from "./utils/terminal";
 import "./styles/Terminal.css";
@@ -191,8 +192,7 @@ const Terminal = () => {
         case "github": {
           const id = nextId.current;
           print(input, <p className="term-dim">Fetching github.com/miheer2003…</p>);
-          fetch("/api/github")
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
+          getGithub()
             .then((d: GithubData) => {
               const active = d.weeks.flat().filter((x) => x.c > 0).length;
               setLines((l) =>

@@ -11,6 +11,7 @@ import Contact from "./Contact";
 import Cursor from "./Cursor";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
+import Numbers from "./Numbers";
 import Quote from "./Quote";
 import TechStack from "./TechStack";
 import TerminalRoot from "./TerminalRoot";
@@ -110,6 +111,7 @@ const MainContainer = () => {
       <WhatIDo />
       <Career />
       <Quote />
+      <Numbers />
       <TechStack />
       <Certifications />
       <Contact />

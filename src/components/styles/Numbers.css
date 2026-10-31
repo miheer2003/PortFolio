@@ -1,0 +1,162 @@
+/* "What the pressure turned into": sits between the quote and Stack,
+   using the space that used to be empty padding. */
+.quote:has(+ .numbers) {
+  padding-bottom: clamp(48px, 6vw, 96px);
+}
+.numbers {
+  position: relative;
+  padding: clamp(24px, 3vw, 48px) 0 0;
+}
+.numbers + .section {
+  padding-top: calc(var(--section-gap) * 0.8);
+}
+
+.numbers-kicker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 clamp(20px, 2.6vw, 36px);
+  color: var(--text-dim);
+}
+.numbers-kicker::before,
+.numbers-kicker::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.numbers-kicker .star-dock {
+  width: 22px;
+  height: 22px;
+}
+
+.numbers-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.num {
+  position: relative;
+  padding: clamp(12px, 1.6vw, 24px) clamp(16px, 2vw, 32px) clamp(20px, 2.4vw, 36px);
+  transition: opacity 0.5s var(--ease-out);
+}
+.num + .num {
+  border-left: 1px solid var(--line);
+}
+.num:first-child {
+  padding-left: 0;
+}
+.num-in {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.4vw, 20px);
+  will-change: transform;
+}
+.num.is-dim {
+  opacity: 0.35;
+}
+
+.num-value {
+  display: inline-flex;
+  align-items: flex-start;
+  font-size: clamp(60px, 9.4vw, 172px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.num-pre {
+  margin: 0.14em 0.3em 0 0;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+.num-suf {
+  margin-left: 0.04em;
+  font-size: 0.72em;
+  font-style: italic;
+  letter-spacing: 0;
+  color: var(--accent);
+}
+
+.odo {
+  display: inline-flex;
+}
+.odo-digit {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  /* a hair of room so descending curves aren't clipped */
+  padding-bottom: 0.02em;
+}
+.odo-strip {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+.odo-strip > span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
+.num-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  max-width: 24ch;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.num::after {
+  /* burgundy underline that draws on hover */
+  content: "";
+  position: absolute;
+  left: clamp(16px, 2vw, 32px);
+  right: clamp(16px, 2vw, 32px);
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-out);
+}
+.num:first-child::after {
+  left: 0;
+}
+.num:hover::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 1023px) {
+  .numbers-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .num:nth-child(3) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .num:nth-child(3)::after {
+    left: 0;
+  }
+  .num:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+  .num-value {
+    font-size: clamp(56px, 13vw, 120px);
+  }
+}
+@media (max-width: 420px) {
+  .num {
+    padding-left: 14px;
+    padding-right: 10px;
+  }
+  .num-pre {
+    font-size: 10px;
+  }
+}

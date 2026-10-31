@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { MdArrowOutward } from "react-icons/md";
 import type { Day, GithubData } from "../../api/github";
 import { GH } from "../data/profile";
+import { getGithub } from "./utils/github";
 import "./styles/GitHubActivity.css";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -34,8 +35,7 @@ const GitHubActivity = ({ onEnter }: { onEnter?: () => void }) => {
       ([e]) => {
         if (!e.isIntersecting) return;
         near.disconnect();
-        fetch("/api/github")
-          .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+        getGithub()
           .then(setData)
           .catch(() => setFailed(true));
       },
