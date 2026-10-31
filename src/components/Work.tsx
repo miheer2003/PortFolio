@@ -100,11 +100,12 @@ const Work = () => {
           })}
         </ol>
 
-        <a className="work-more mono link-line" href={`${GH}?tab=repositories`} target="_blank" rel="noopener noreferrer">
-          More on GitHub <MdArrowOutward />
-        </a>
-
-        <GitHubActivity />
+        <div className="work-foot">
+          <a className="work-more mono link-line" href={`${GH}?tab=repositories`} target="_blank" rel="noopener noreferrer">
+            More on GitHub <MdArrowOutward />
+          </a>
+          <GitHubActivity />
+        </div>
       </div>
 
       <div className={`work-preview ${hovered !== null ? "is-visible" : ""}`} ref={previewRef} aria-hidden="true">
