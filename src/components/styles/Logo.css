@@ -1,0 +1,32 @@
+.logo {
+  display: block;
+  width: auto;
+  overflow: visible;
+}
+.logo-m {
+  fill: currentColor;
+}
+.logo-j,
+.logo-star {
+  fill: var(--logo-accent, var(--accent));
+  transition: fill 0.5s var(--ease-out);
+}
+.logo-turn,
+.logo-star {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+.logo-star {
+  transition: fill 0.5s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+@keyframes logo-pop {
+  from {
+    transform: scale(0) rotate(-135deg);
+  }
+}
+@keyframes logo-turn {
+  to {
+    transform: rotate(2turn);
+  }
+}

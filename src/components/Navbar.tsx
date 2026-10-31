@@ -1,4 +1,5 @@
 import CoffeeButton from "./CoffeeButton";
+import Logo from "./Logo";
 import { useEffect, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getLenis, scrollToTarget } from "./utils/lenis";
@@ -60,8 +61,8 @@ const Navbar = () => {
   return (
     <header className={`header ${scrolled ? "is-scrolled" : ""} ${open ? "is-open" : ""} ${active === "contact" && !open ? "is-dark" : ""}`}>
       <div className="header-bar">
-        <a href="#top" className="nav-logo" onClick={(e) => go(e, "top")} aria-label="Back to top">
-          MJ<span>.</span>
+        <a href="#top" className="nav-logo" onClick={(e) => go(e, "top")} aria-label="Miheer Jangale, back to top">
+          <Logo />
         </a>
 
         <nav className="nav-pill" aria-label="Primary">
