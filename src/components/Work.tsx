@@ -1,48 +1,57 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { MdArrowOutward } from "react-icons/md";
 import "./styles/Work.css";
 import SectionHead from "./SectionHead";
+import ProjectArt, { type ArtKey } from "./ProjectArt";
 
 gsap.registerPlugin(useGSAP);
 
-const img = (name: string) => `${import.meta.env.BASE_URL}images/${name}`;
+const GH = "https://github.com/miheer2003";
 
-const PROJECTS = [
+const PROJECTS: { title: string; kind: string; tools: string; art: ArtKey; link: string }[] = [
   {
-    title: "OptiRoute",
+    title: "PromptFlow",
+    kind: "Gen AI · Apple Shortcuts",
+    tools: "Next.js · Gemini · OpenAI · Zod · Supabase · Redis",
+    art: "promptflow",
+    link: `${GH}/Prompt-Flow`,
+  },
+  {
+    title: "JobHunt Agent",
+    kind: "AI agent · Automation",
+    tools: "Python · Claude · Gemini · Ollama · ATS APIs",
+    art: "jobhunt",
+    link: `${GH}/JOB-HUNT-Automation-With-AI`,
+  },
+  {
+    title: "AirLight",
+    kind: "Computer vision · IoT",
+    tools: "Python · MediaPipe · OpenCV · Flask · Tuya",
+    art: "airlight",
+    link: `${GH}/Air-Light`,
+  },
+  {
+    title: "UniYaar",
     kind: "Full-stack platform",
-    tools: "Java · Spring Boot · React · MySQL · Docker · JWT",
-    image: img("optiroute.jpg"),
-    link: "https://github.com/miheer2003/OptiRoute",
+    tools: "Java 21 · Spring Boot 3 · React · TypeScript · MySQL",
+    art: "uniyaar",
+    link: `${GH}/Uni-Yaar`,
   },
   {
-    title: "Sign Language Recognition",
-    kind: "AI / Deep learning",
-    tools: "Python · TensorFlow · Keras · OpenCV · CNN",
-    image: img("sign-language.jpg"),
-    link: "https://github.com/miheer2003/Sign-Language-Recognition-Using-ML",
+    title: "AsyncBatchPipeline",
+    kind: "Async orchestration",
+    tools: "JavaScript · DAG scheduler · Retries · AbortSignal",
+    art: "pipeline",
+    link: `${GH}/async-batch-pipeline`,
   },
   {
-    title: "Software Dev Optimization",
-    kind: "Machine learning",
-    tools: "Python · Scikit-learn · Decision Tree · Random Forest",
-    image: img("devoptimizer.jpg"),
-  },
-  {
-    title: "Virtual Calculator",
-    kind: "Computer vision",
-    tools: "Python · OpenCV · MediaPipe · Hand tracking",
-    image: img("virtual-calculator.jpg"),
-    link: "https://github.com/miheer2003/Virtual-Calculator",
-  },
-  {
-    title: "Bazaar Aaina",
-    kind: "Full-stack + ML",
-    tools: "Next.js · Node.js · Express · Machine learning",
-    image: img("bazaar-aaina.jpg"),
-    link: "https://github.com/miheer2003/Bazaar-Aaina",
+    title: "Task Manager API",
+    kind: "Backend · REST",
+    tools: "Java · Spring Boot 3 · Hibernate · MySQL · OpenAPI",
+    art: "tasks",
+    link: `${GH}/Task-Manager`,
   },
 ];
 
@@ -50,26 +59,6 @@ const Work = () => {
   const rootRef = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState<number | null>(null);
-
-  // Decode preview images ahead of time so the first hover doesn't stall.
-  useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (!e.isIntersecting) return;
-        PROJECTS.forEach((p) => {
-          const i = new Image();
-          i.src = p.image;
-          i.decode?.().catch(() => {});
-        });
-        io.disconnect();
-      },
-      { rootMargin: "800px 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   useGSAP(
     () => {
@@ -130,7 +119,6 @@ const Work = () => {
 
         <ol className="work-list" onPointerLeave={() => setHovered(null)}>
           {PROJECTS.map((p, i) => {
-            const Tag = p.link ? "a" : "div";
             return (
               <li
                 key={p.title}
@@ -138,43 +126,37 @@ const Work = () => {
                 onPointerEnter={() => setHovered(i)}
                 data-reveal="fade"
               >
-                <Tag
-                  className="work-row"
-                  {...(p.link ? { href: p.link, target: "_blank", rel: "noopener noreferrer" } : {})}
-                >
+                <a className="work-row" href={p.link} target="_blank" rel="noopener noreferrer">
                   <span className="mono work-index">{String(i + 1).padStart(2, "0")}</span>
                   <span className="work-title">{p.title}</span>
                   <span className="work-kind">{p.kind}</span>
                   <span className="work-tools mono">{p.tools}</span>
                   <span className="work-arrow" aria-hidden="true">
-                    {p.link ? <MdArrowOutward /> : null}
+                    <MdArrowOutward />
                   </span>
                   <span className="work-thumb work-cover">
-                    <img src={p.image} alt="" loading="lazy" decoding="async" />
+                    <ProjectArt art={p.art} id={`t-${p.art}`} />
                     <span className="work-cover-glare" aria-hidden="true" />
-                    <span className="work-cover-tag mono">
-                      {String(i + 1).padStart(2, "0")} · {p.kind}
-                    </span>
                   </span>
-                </Tag>
+                </a>
               </li>
             );
           })}
         </ol>
+
+        <a className="work-more mono link-line" href={`${GH}?tab=repositories`} target="_blank" rel="noopener noreferrer">
+          More on GitHub <MdArrowOutward />
+        </a>
       </div>
 
       <div className={`work-preview ${hovered !== null ? "is-visible" : ""}`} ref={previewRef} aria-hidden="true">
         <div className="work-preview-in">
           {PROJECTS.map((p, i) => (
             <div key={p.title} className={`work-cover ${hovered === i ? "is-current" : ""}`}>
-              <img src={p.image} alt="" decoding="async" />
+              <ProjectArt art={p.art} id={`p-${p.art}`} />
             </div>
           ))}
           <span className="work-cover-glare" aria-hidden="true" />
-          <div className="work-preview-label mono">
-            <span className="work-chip">{hovered !== null ? String(hovered + 1).padStart(2, "0") : "00"}</span>
-            <span className="work-chip">{hovered !== null ? PROJECTS[hovered].kind : ""}</span>
-          </div>
         </div>
       </div>
     </section>

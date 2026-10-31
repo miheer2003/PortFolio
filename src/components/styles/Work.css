@@ -217,3 +217,79 @@
     transform: none;
   }
 }
+
+/* ---------- Illustrated covers ---------- */
+.work-cover .art {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.art text {
+  font-family: var(--font-sans, "Geist", sans-serif);
+}
+.art .art-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+}
+.work-preview .work-cover .art {
+  transform: scale(1.08);
+  transition: transform 0.7s var(--ease-out);
+}
+.work-preview .work-cover.is-current .art {
+  transform: scale(1);
+}
+
+/* Animations only run on the visible preview or a hovered/visible thumb */
+.work-preview .is-current .art-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: art-spin 4s linear infinite;
+}
+.work-preview .is-current .art-pulse,
+.work-thumb .art-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: art-pulse 1.6s ease-in-out infinite;
+}
+.work-preview .is-current .art-route,
+.work-thumb .art-route {
+  animation: art-dash 1.2s linear infinite;
+}
+.work-preview .is-current .art-flow {
+  animation: art-dash 0.8s linear infinite;
+}
+.work-preview .is-current .art-breathe {
+  animation: art-breathe 3s ease-in-out infinite;
+}
+.work-preview .is-current .art-caret {
+  animation: art-blink 1s steps(1) infinite;
+}
+@keyframes art-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes art-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.6; }
+}
+@keyframes art-dash {
+  to { stroke-dashoffset: -20; }
+}
+@keyframes art-breathe {
+  50% { opacity: 0.6; }
+}
+@keyframes art-blink {
+  50% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .art * {
+    animation: none !important;
+  }
+}
+
+.work-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  color: var(--text);
+}
