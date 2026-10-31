@@ -14,6 +14,7 @@ import Navbar from "./Navbar";
 import Quote from "./Quote";
 import TechStack from "./TechStack";
 import TerminalRoot from "./TerminalRoot";
+import Ticker from "./Ticker";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import { prefersReducedMotion } from "./utils/lenis";
@@ -105,6 +106,7 @@ const MainContainer = () => {
       <Landing />
       <About />
       <Work />
+      <Ticker />
       <WhatIDo />
       <Career />
       <Quote />

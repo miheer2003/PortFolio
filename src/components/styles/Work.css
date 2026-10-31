@@ -285,11 +285,3 @@
     animation: none !important;
   }
 }
-
-.work-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 28px;
-  color: var(--text);
-}

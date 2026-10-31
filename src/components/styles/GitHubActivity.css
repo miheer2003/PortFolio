@@ -1,98 +1,90 @@
-/* Footer row of the Work list: "More on GitHub" + live strip */
-.work-foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px 32px;
-  margin-top: 28px;
-}
-.work-foot .work-more {
-  margin-top: 0;
-}
+/* Closing row of the Work list: "More on GitHub" + live calendar.
+   Uses the same .work-row grid as the projects, so columns line up. */
 
-.ghm {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
+.work-gh .work-title {
+  color: var(--text-dim);
+  transition: transform 0.7s var(--ease-out), color 0.4s var(--ease-out);
+}
+.work-gh:hover .work-title {
   color: var(--text);
 }
-
-.ghm-grid {
-  display: flex;
-  gap: 2px;
+.work-gh .work-index {
+  font-size: 15px;
 }
-.ghm-week {
+
+.gh-kind {
   display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gh-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+}
+.gh-latest {
+  padding-left: 17px;
+  color: var(--text-mute);
+  font-size: 11px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Calendar: newest weeks on the right; older weeks are clipped on the left
+   so it always fills exactly the width of the column. */
+.gh-cal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px);
+  mask-image: linear-gradient(90deg, transparent, #000 48px);
+}
+.gh-week {
+  display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
   gap: 2px;
 }
-.ghm-cell {
+.gh-cell {
   display: block;
   width: 7px;
   height: 7px;
   border-radius: 2px;
   background: rgba(42, 26, 21, 0.07);
 }
-.ghm-cell.l1 { background: #e9d3b4; }
-.ghm-cell.l2 { background: #c9a184; }
-.ghm-cell.l3 { background: #a06a5a; }
-.ghm-cell.l4 { background: var(--burgundy); }
-.ghm-cell.is-empty { background: transparent; }
+.gh-cell.l1 { background: #e9d3b4; }
+.gh-cell.l2 { background: #c9a184; }
+.gh-cell.l3 { background: #a06a5a; }
+.gh-cell.l4 { background: var(--burgundy); }
+.gh-cell.is-empty { background: transparent; }
 
-.ghm-cell[data-d] {
+.gh-cell[data-d] {
   transition: transform 0.2s var(--ease-out);
 }
-.ghm-cell[data-d]:hover {
-  transform: scale(1.6);
+.gh-cell[data-d]:hover {
+  transform: scale(1.7);
 }
 
-.is-loading .ghm-cell {
-  animation: ghm-shimmer 1.6s ease-in-out infinite;
+.is-loading .gh-cell {
+  animation: gh-shimmer 1.6s ease-in-out infinite;
 }
-@keyframes ghm-shimmer {
+@keyframes gh-shimmer {
   50% { opacity: 0.4; }
 }
-.is-ready:not(.is-in) .ghm-cell[data-d] {
+.is-ready:not(.is-in) .gh-cell[data-d] {
   opacity: 0;
 }
-.is-ready.is-in .ghm-cell[data-d] {
-  animation: ghm-in 0.5s var(--ease-out) backwards;
-  animation-delay: calc(var(--i) * 18ms);
+.is-ready.is-in .gh-cell[data-d] {
+  animation: gh-in 0.5s var(--ease-out) backwards;
+  animation-delay: calc(var(--i) * 12ms);
 }
-@keyframes ghm-in {
+@keyframes gh-in {
   from { opacity: 0; transform: scale(0.3); }
 }
 
-.ghm-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 11px;
-  line-height: 1.3;
-}
-.ghm-total,
-.ghm-latest {
-  white-space: nowrap;
-}
-.ghm-total {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.ghm-total strong {
-  font-weight: 600;
-}
-.ghm-latest {
-  color: var(--text-mute);
-  padding-left: 15px;
-}
-.ghm:hover .ghm-total {
-  color: var(--accent);
-}
-
-.ghm-tip {
+.gh-tip {
   position: absolute;
   left: 0;
   top: 0;
@@ -107,38 +99,25 @@
   opacity: 0;
   transition: opacity 0.15s;
 }
-.ghm-tip.is-on {
+.gh-tip.is-on {
   opacity: 1;
 }
 
-@media (max-width: 640px) {
-  .ghm {
-    gap: 12px;
+@media (hover: none), (max-width: 900px) {
+  .gh-cal {
+    margin-top: 6px;
   }
-  /* last 16 weeks on phones */
-  .ghm-week:nth-child(-n + 10) {
-    display: none;
-  }
-  .ghm-long {
-    display: none;
-  }
-  .ghm-cell {
-    width: 6px;
-    height: 6px;
+  .gh-latest {
+    white-space: normal;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .is-ready:not(.is-in) .ghm-cell[data-d] {
+  .is-ready:not(.is-in) .gh-cell[data-d] {
     opacity: 1;
   }
-  .is-ready.is-in .ghm-cell[data-d],
-  .is-loading .ghm-cell {
+  .is-ready.is-in .gh-cell[data-d],
+  .is-loading .gh-cell {
     animation: none;
-  }
-}
-@media (max-width: 380px) {
-  .ghm-week:nth-child(-n + 13) {
-    display: none;
   }
 }
