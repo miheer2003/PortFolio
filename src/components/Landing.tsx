@@ -5,6 +5,7 @@ import { MdArrowOutward, MdArrowDownward } from "react-icons/md";
 import "./styles/Landing.css";
 import TimeWidgets from "./TimeWidgets";
 import { prefersReducedMotion, scrollToTarget } from "./utils/lenis";
+import { StarDock } from "./ScrollStar";
 
 gsap.registerPlugin(useGSAP);
 
@@ -137,6 +138,7 @@ const Landing = () => {
           </h1>
 
           <figure className={`hero-photo ${webgl ? "is-webgl" : ""}`}>
+            <StarDock />
             <img
               className="hero-photo-img"
               src={PORTRAIT}

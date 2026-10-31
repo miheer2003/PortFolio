@@ -5,6 +5,7 @@ import { MdArrowOutward } from "react-icons/md";
 import "./styles/Work.css";
 import SectionHead from "./SectionHead";
 import ProjectArt, { type ArtKey } from "./ProjectArt";
+import { StarDock } from "./ScrollStar";
 
 gsap.registerPlugin(useGSAP);
 
@@ -12,18 +13,25 @@ const GH = "https://github.com/miheer2003";
 
 const PROJECTS: { title: string; kind: string; tools: string; art: ArtKey; link: string }[] = [
   {
-    title: "PromptFlow",
-    kind: "Gen AI · Apple Shortcuts",
-    tools: "Next.js · Gemini · OpenAI · Zod · Supabase · Redis",
-    art: "promptflow",
-    link: `${GH}/Prompt-Flow`,
+    title: "UniYaar",
+    kind: "Full-stack platform",
+    tools: "Java 21 · Spring Boot 3 · React · TypeScript · MySQL",
+    art: "uniyaar",
+    link: `${GH}/Uni-Yaar`,
   },
   {
-    title: "JobHunt Agent",
-    kind: "AI agent · Automation",
-    tools: "Python · Claude · Gemini · Ollama · ATS APIs",
-    art: "jobhunt",
-    link: `${GH}/JOB-HUNT-Automation-With-AI`,
+    title: "PDF Tool",
+    kind: "Document utility",
+    tools: "In progress",
+    art: "pdf",
+    link: `${GH}/PDF-Tool`,
+  },
+  {
+    title: "OptiRoute",
+    kind: "Route optimisation",
+    tools: "Java · JavaScript · Docker",
+    art: "optiroute",
+    link: `${GH}/OptiRoute`,
   },
   {
     title: "AirLight",
@@ -33,25 +41,18 @@ const PROJECTS: { title: string; kind: string; tools: string; art: ArtKey; link:
     link: `${GH}/Air-Light`,
   },
   {
-    title: "UniYaar",
-    kind: "Full-stack platform",
-    tools: "Java 21 · Spring Boot 3 · React · TypeScript · MySQL",
-    art: "uniyaar",
-    link: `${GH}/Uni-Yaar`,
-  },
-  {
-    title: "AsyncBatchPipeline",
-    kind: "Async orchestration",
-    tools: "JavaScript · DAG scheduler · Retries · AbortSignal",
-    art: "pipeline",
-    link: `${GH}/async-batch-pipeline`,
-  },
-  {
     title: "Task Manager API",
     kind: "Backend · REST",
     tools: "Java · Spring Boot 3 · Hibernate · MySQL · OpenAPI",
     art: "tasks",
     link: `${GH}/Task-Manager`,
+  },
+  {
+    title: "JobHunt Agent",
+    kind: "AI agent · Automation",
+    tools: "Python · Claude · Gemini · Ollama · ATS APIs",
+    art: "jobhunt",
+    link: `${GH}/JOB-HUNT-Automation-With-AI`,
   },
 ];
 
@@ -114,7 +115,7 @@ const Work = () => {
       <div className="wrap">
         <SectionHead index="02" label="Selected work" />
         <h2 className="sec-title" data-reveal="lines">
-          Things I've <span className="serif accent-text">built</span>
+          Things I've <StarDock before={<span className="serif accent-text">built</span>} />
         </h2>
 
         <ol className="work-list" onPointerLeave={() => setHovered(null)}>

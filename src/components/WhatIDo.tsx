@@ -1,5 +1,6 @@
 import "./styles/WhatIDo.css";
 import SectionHead from "./SectionHead";
+import { StarDock } from "./ScrollStar";
 
 const CAPABILITIES = [
   {
@@ -41,7 +42,7 @@ const WhatIDo = () => (
     <div className="wrap">
       <SectionHead index="03" label="Capabilities" />
       <h2 className="sec-title" data-reveal="lines">
-        What I <span className="serif accent-text">do</span>
+        What <StarDock before="I" /> <span className="serif accent-text">do</span>
       </h2>
 
       <div className="cap-grid" data-reveal="stagger">

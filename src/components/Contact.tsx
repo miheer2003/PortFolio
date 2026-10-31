@@ -4,6 +4,7 @@ import "./styles/Contact.css";
 import CoffeeButton from "./CoffeeButton";
 import { useLocalTime } from "./Landing";
 import { scrollToTarget } from "./utils/lenis";
+import { StarDock } from "./ScrollStar";
 
 const EMAIL = "miheerjangale7@gmail.com";
 
@@ -44,7 +45,7 @@ const Contact = () => {
           <span className="live-dot" /> Open to collaborations &amp; interesting problems
         </p>
         <h2 className="contact-title" data-reveal="lines">
-          Let's build something <span className="serif accent-text">intelligent.</span>
+          Let's build <StarDock before="something" /> <span className="serif accent-text">intelligent.</span>
         </h2>
 
         <div className="contact-actions" data-reveal="fade">

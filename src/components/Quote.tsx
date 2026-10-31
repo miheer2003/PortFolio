@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import "./styles/Quote.css";
 import { prefersReducedMotion } from "./utils/lenis";
+import { StarDock } from "./ScrollStar";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -63,6 +64,7 @@ const Quote = () => {
                   {c}
                 </span>
               ))}
+              {w === WORDS[WORDS.length - 1] && <StarDock />}
             </span>
           ))}
         </blockquote>

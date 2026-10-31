@@ -24,6 +24,7 @@ import {
 } from "react-icons/si";
 import "./styles/TechStack.css";
 import SectionHead from "./SectionHead";
+import { StarDock } from "./ScrollStar";
 
 type Tech = { name: string; Icon?: IconType };
 type Group = { label: string; items: Tech[]; concept?: boolean; wide?: boolean };
@@ -91,7 +92,7 @@ const TechStack = () => (
     <div className="wrap">
       <SectionHead index="05" label="Stack" />
       <h2 className="sec-title" data-reveal="lines">
-        Tools I <span className="serif accent-text">trust</span>
+        Tools I <StarDock before={<span className="serif accent-text">trust</span>} />
       </h2>
 
       <div className="stack-groups">

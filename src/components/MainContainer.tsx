@@ -16,6 +16,7 @@ import TechStack from "./TechStack";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import { prefersReducedMotion } from "./utils/lenis";
+import ScrollStar from "./ScrollStar";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
@@ -110,6 +111,7 @@ const MainContainer = () => {
       <Certifications />
       <Contact />
       <CoffeeRoot />
+      <ScrollStar />
       <div className="grain" aria-hidden="true" />
     </div>
   );

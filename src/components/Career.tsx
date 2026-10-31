@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import "./styles/Career.css";
 import SectionHead from "./SectionHead";
 import { prefersReducedMotion } from "./utils/lenis";
+import { StarDock } from "./ScrollStar";
 
 gsap.registerPlugin(useGSAP);
 
@@ -71,7 +72,7 @@ const Career = () => {
       <div className="wrap">
         <SectionHead index="04" label="Experience & education" />
         <h2 className="sec-title" data-reveal="lines">
-          The <span className="serif accent-text">journey</span> so far
+          The <StarDock before={<span className="serif accent-text">journey</span>} /> so far
         </h2>
 
         <ol className="exp-list">

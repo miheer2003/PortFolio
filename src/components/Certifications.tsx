@@ -8,6 +8,7 @@ import type { IconType } from "react-icons";
 import "./styles/Certifications.css";
 import SectionHead from "./SectionHead";
 import { prefersReducedMotion } from "./utils/lenis";
+import { StarDock } from "./ScrollStar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -308,7 +309,7 @@ const Certifications = () => {
         <SectionHead index="06" label="Certifications" />
         <div className="cert-head">
           <h2 className="sec-title" data-reveal="lines">
-            Proof of <span className="serif accent-text">practice</span>
+            Proof <StarDock before="of" /> <span className="serif accent-text">practice</span>
           </h2>
           <div className="cert-controls">
             <span className="mono cert-count">

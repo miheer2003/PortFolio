@@ -32,9 +32,12 @@ const Grid = ({ id, color, opacity = 0.08 }: { id: string; color: string; opacit
   </>
 );
 
-/* 01 PromptFlow: a prompt turns into Shortcut action blocks */
-const PromptFlowArt = ({ id }: ArtProps) => (
-  <Frame label="Prompt turning into Apple Shortcut blocks">
+/* OptiRoute: delivery stops joined in the optimal order */
+const STOPS: [number, number][] = [
+  [62, 210], [118, 92], [214, 150], [286, 66], [338, 196],
+];
+const OptiRouteArt = ({ id }: ArtProps) => (
+  <Frame label="Map with delivery stops joined by an optimised route">
     <defs>
       <linearGradient id={`${id}-bg`} x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stopColor={C.espresso} />
@@ -42,35 +45,37 @@ const PromptFlowArt = ({ id }: ArtProps) => (
       </linearGradient>
     </defs>
     <rect width="400" height="300" fill={`url(#${id}-bg)`} />
-    <Grid id={id} color={C.latte} />
-    {/* prompt bubble */}
-    <g>
-      <rect x="24" y="96" width="170" height="70" rx="18" fill={C.latte} />
-      <path d="M48 166l-6 16 22-16z" fill={C.latte} />
-      <text x="46" y="124" className="art-mono" fill={C.mocha} fontSize="9">PROMPT</text>
-      <text x="46" y="146" fill={C.espresso} fontSize="14" fontWeight="500">Dim lights at 10 pm</text>
-    </g>
-    {/* sparkle */}
-    <path className="art-spin" d="M214 131l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill={C.cream} />
-    {/* blocks */}
-    {[
-      { y: 62, t: "When it's 10:00 PM", c: C.cream },
-      { y: 112, t: "Set brightness 30%", c: C.mocha },
-      { y: 162, t: "Turn on Focus", c: C.cream },
-      { y: 212, t: "Play Lo-fi playlist", c: C.mocha },
-    ].map((b, i) => (
-      <g className="art-rise" style={{ animationDelay: `${i * 0.12}s` }} key={b.y}>
-        <rect x="238" y={b.y} width="136" height="38" rx="10" fill={b.c} />
-        <rect x="248" y={b.y + 11} width="16" height="16" rx="5" fill={C.espresso} fillOpacity="0.85" />
-        <text x="272" y={b.y + 23.5} fill={C.espresso} fontSize="11" fontWeight="500">{b.t}</text>
+    <Grid id={id} color={C.latte} opacity={0.07} />
+    {/* naive route, faded */}
+    <path d="M62 210 L286 66 L118 92 L338 196 L214 150" fill="none" stroke={C.latte} strokeOpacity="0.18" strokeWidth="1.5" strokeDasharray="4 6" />
+    {/* optimised route */}
+    <path
+      className="art-route"
+      d="M62 210 C 70 140, 90 100, 118 92 S 190 120, 214 150 S 260 70, 286 66 S 340 140, 338 196"
+      fill="none"
+      stroke={C.cream}
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeDasharray="2 8"
+    />
+    {STOPS.map(([x, y], i) => (
+      <g key={i} transform={`translate(${x} ${y})`}>
+        <circle r="15" fill={i === 0 ? C.cream : C.latte} />
+        <text y="4.5" textAnchor="middle" className="art-mono" fill={C.espresso} fontSize="12" fontWeight="600">
+          {i + 1}
+        </text>
       </g>
     ))}
-    <path d="M374 100v12M374 150v12M374 200v12" stroke={C.cream} strokeOpacity="0.5" />
-    <text x="28" y="270" className="art-mono" fill={C.cream} fillOpacity="0.7" fontSize="9">GEMINI · STRUCTURED OUTPUT → .SHORTCUT</text>
+    <circle className="art-pulse" cx="62" cy="210" r="22" fill="none" stroke={C.cream} strokeOpacity="0.6" />
+    <g transform="translate(200 228)">
+      <rect width="178" height="30" rx="15" fill={C.latte} />
+      <text x="16" y="19.5" className="art-mono" fill={C.wine} fontSize="9">5 STOPS · SHORTEST ORDER</text>
+    </g>
+    <text x="24" y="288" className="art-mono" fill={C.latte} fillOpacity="0.55" fontSize="9">JAVA API · JS CLIENT · DOCKER</text>
   </Frame>
 );
 
-/* 02 Job-hunt agent: funnel 2000 → 40 → 5 */
+/* Job-hunt agent: funnel 2000 → 40 → 5 */
 const JobHuntArt = ({ id }: ArtProps) => (
   <Frame label="Job funnel from 2000 postings to 5 in the inbox">
     <rect width="400" height="300" fill={C.elev} />
@@ -109,7 +114,7 @@ const JobHuntArt = ({ id }: ArtProps) => (
   </Frame>
 );
 
-/* 03 AirLight: hand landmarks controlling a bulb */
+/* AirLight: hand landmarks controlling a bulb */
 const HAND: [number, number][] = [
   [120, 250],
   [95, 230], [78, 208], [66, 188], [58, 170],
@@ -156,7 +161,7 @@ const AirLightArt = ({ id }: ArtProps) => (
   </Frame>
 );
 
-/* 04 UniYaar: campus map with a route */
+/* UniYaar: campus map with a route */
 const UniYaarArt = () => (
   <Frame label="Campus map with a walking route between pins">
     <rect width="400" height="300" fill={C.latte} />
@@ -196,57 +201,34 @@ const UniYaarArt = () => (
   </Frame>
 );
 
-/* 05 AsyncBatchPipeline: DAG with a running node */
-const NODES: { x: number; y: number; s: "done" | "run" | "wait" | "fail"; l: string }[] = [
-  { x: 60, y: 150, s: "done", l: "fetch" },
-  { x: 160, y: 80, s: "done", l: "parse" },
-  { x: 160, y: 220, s: "run", l: "enrich" },
-  { x: 260, y: 80, s: "run", l: "store" },
-  { x: 260, y: 220, s: "wait", l: "notify" },
-  { x: 345, y: 150, s: "wait", l: "report" },
-];
-const EDGES = [[0, 1], [0, 2], [1, 3], [2, 4], [3, 5], [4, 5], [1, 4]];
-const PipelineArt = ({ id }: ArtProps) => (
-  <Frame label="Task dependency graph with running and queued tasks">
-    <defs>
-      <linearGradient id={`${id}-bg`} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor={C.mocha} />
-        <stop offset="1" stopColor="#8a5f4d" />
-      </linearGradient>
-    </defs>
-    <rect width="400" height="300" fill={`url(#${id}-bg)`} />
-    <Grid id={id} color={C.latte} opacity={0.1} />
-    {EDGES.map(([a, b]) => {
-      const p = NODES[a];
-      const q = NODES[b];
-      const mx = (p.x + q.x) / 2;
-      return (
-        <path
-          key={`${a}-${b}`}
-          className={NODES[b].s === "run" ? "art-flow" : ""}
-          d={`M${p.x} ${p.y} C ${mx} ${p.y}, ${mx} ${q.y}, ${q.x} ${q.y}`}
-          fill="none"
-          stroke={C.latte}
-          strokeOpacity={NODES[b].s === "wait" ? 0.35 : 0.85}
-          strokeWidth="2"
-          strokeDasharray={NODES[b].s === "run" ? "6 6" : undefined}
-        />
-      );
-    })}
-    {NODES.map((n) => (
-      <g key={n.l} transform={`translate(${n.x} ${n.y})`}>
-        {n.s === "run" && <circle className="art-pulse" r="22" fill={C.latte} fillOpacity="0.25" />}
-        <circle r="16" fill={n.s === "done" ? C.latte : n.s === "run" ? C.cream : C.mocha} stroke={C.latte} strokeWidth="2" />
-        {n.s === "done" && <path d="M-6 0l4 4 8-8" stroke={C.wine} strokeWidth="2.4" fill="none" strokeLinecap="round" />}
-        {n.s === "run" && <circle r="4" fill={C.wine} />}
-        <text y="34" textAnchor="middle" className="art-mono" fill={C.latte} fontSize="9">{n.l.toUpperCase()}</text>
+/* PDF Tool: pages fanned out, combined into one document */
+const PdfArt = ({ id }: ArtProps) => (
+  <Frame label="PDF pages being combined into one document">
+    <rect width="400" height="300" fill={C.latte} />
+    <Grid id={id} color={C.espresso} opacity={0.06} />
+    {[-14, 0, 14].map((r, i) => (
+      <g key={i} transform={`translate(${70 + i * 26} ${70 + i * 6}) rotate(${r} 50 65)`}>
+        <rect width="100" height="130" rx="10" fill={i === 2 ? C.elev : C.cream} stroke={C.espresso} strokeOpacity="0.12" />
+        {[0, 1, 2, 3].map((l) => (
+          <rect key={l} x="14" y={24 + l * 16} width={l === 3 ? 40 : 72} height="6" rx="3" fill={C.mocha} fillOpacity="0.45" />
+        ))}
       </g>
     ))}
-    <text x="24" y="282" className="art-mono" fill={C.latte} fillOpacity="0.75" fontSize="9">MAX CONCURRENCY 2 · RETRY W/ BACKOFF · ABORT</text>
+    <path className="art-flow" d="M230 140 H272" stroke={C.wine} strokeWidth="3" strokeLinecap="round" strokeDasharray="6 6" />
+    <path d="M266 132 L276 140 L266 148" fill="none" stroke={C.wine} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <g transform="translate(288 68)" className="art-breathe">
+      <rect width="92" height="124" rx="10" fill={C.wine} />
+      <rect x="0" y="0" width="92" height="124" rx="10" fill="none" stroke={C.espresso} strokeOpacity="0.2" />
+      <text x="46" y="70" textAnchor="middle" className="art-mono" fill={C.latte} fontSize="18" fontWeight="600">PDF</text>
+      {[0, 1].map((l) => (
+        <rect key={l} x="18" y={88 + l * 12} width={l ? 34 : 56} height="5" rx="2.5" fill={C.latte} fillOpacity="0.5" />
+      ))}
+    </g>
+    <text x="24" y="288" className="art-mono" fill={C.espresso} fillOpacity="0.5" fontSize="9">PAGES IN → ONE CLEAN PDF OUT</text>
   </Frame>
 );
 
-/* 06 Task Manager: kanban + API line */
+/* Task Manager: kanban + API line */
 const TaskArt = ({ id }: ArtProps) => (
   <Frame label="Kanban board with an API response">
     <rect width="400" height="300" fill={C.cream} />
@@ -275,14 +257,14 @@ const TaskArt = ({ id }: ArtProps) => (
   </Frame>
 );
 
-export type ArtKey = "promptflow" | "jobhunt" | "airlight" | "uniyaar" | "pipeline" | "tasks";
+export type ArtKey = "optiroute" | "pdf" | "jobhunt" | "airlight" | "uniyaar" | "tasks";
 
 const ART: Record<ArtKey, (p: ArtProps) => JSX.Element> = {
-  promptflow: PromptFlowArt,
+  optiroute: OptiRouteArt,
   jobhunt: JobHuntArt,
   airlight: AirLightArt,
   uniyaar: UniYaarArt,
-  pipeline: PipelineArt,
+  pdf: PdfArt,
   tasks: TaskArt,
 };
 
