@@ -25,6 +25,7 @@ import {
 import "./styles/TechStack.css";
 import SectionHead from "./SectionHead";
 import { StarDock } from "./ScrollStar";
+import StackOrbit, { type OrbitItem } from "./StackOrbit";
 
 type Tech = { name: string; Icon?: IconType };
 type Group = { label: string; items: Tech[]; concept?: boolean; wide?: boolean };
@@ -87,13 +88,19 @@ const GROUPS: Group[] = [
   },
 ];
 
+// Every tool with an icon also sits on the sphere.
+const ORBIT: OrbitItem[] = GROUPS.flatMap((g) => g.items).flatMap((t) => (t.Icon ? [{ name: t.name, Icon: t.Icon }] : []));
+
 const TechStack = () => (
   <section className="section stack" id="stack">
     <div className="wrap">
       <SectionHead index="05" label="Stack" />
-      <h2 className="sec-title" data-reveal="lines">
-        Tools I <StarDock before={<span className="serif accent-text">trust</span>} />
-      </h2>
+      <div className="stack-head">
+        <h2 className="sec-title" data-reveal="lines">
+          Tools I <StarDock before={<span className="serif accent-text">trust</span>} />
+        </h2>
+        <StackOrbit items={ORBIT} />
+      </div>
 
       <div className="stack-groups">
         {GROUPS.map((g) => (
@@ -101,7 +108,7 @@ const TechStack = () => (
             <h3 className="mono stack-label">{g.label}</h3>
             <ul className="stack-items" data-reveal="stagger">
               {g.items.map(({ name, Icon }) => (
-                <li key={name} className={`stack-item ${g.concept ? "is-concept" : ""}`}>
+                <li key={name} className={`stack-item ${g.concept ? "is-concept" : ""}`} data-name={name}>
                   {Icon ? <Icon aria-hidden="true" /> : <span className="stack-mark" aria-hidden="true" />}
                   <span>{name}</span>
                 </li>
