@@ -35,7 +35,7 @@ const CERTS: Cert[] = [
     code: "PG—DAC",
     issuer: "CDAC ACTS, Pune",
     year: "2025",
-    image: img("pg-dac.png"),
+    image: img("pg-dac.webp"),
     description: "Post Graduate Diploma in Advanced Computing, focused on full-stack development. Secured All India Rank (AIR) 23.",
     badge: "AIR 23",
   },
@@ -47,7 +47,7 @@ const CERTS: Cert[] = [
     Icon: FaAws,
     issuer: "Amazon Web Services",
     year: "2024",
-    image: img("aws-cloud-foundations.png"),
+    image: img("aws-cloud-foundations.webp"),
     description: "Foundations of AWS Cloud concepts, security and architecture.",
   },
   {

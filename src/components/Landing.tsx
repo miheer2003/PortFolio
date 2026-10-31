@@ -128,7 +128,7 @@ const Landing = () => {
           <h1 className="hero-name" aria-label="Miheer Jangale">
             <span className="hero-line hero-line-1">
               <Chars text="Miheer" />
-            </span>
+            </span>{" "}
             <span className="hero-line hero-line-2">
               <Chars text="Jangale" />
               <span className="hero-char hero-dot" aria-hidden="true">

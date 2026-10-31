@@ -59,6 +59,8 @@ const MainContainer = () => {
           type: "lines",
           mask: "lines",
           autoSplit: true,
+          // Headings may carry an aria-label. A paragraph may not, so leave its text readable as it is.
+          aria: el.matches("h1, h2, h3, h4, h5, h6") ? "auto" : "none",
           onSplit: (self) => {
             gsap.set(self.masks, { paddingBottom: "0.14em", marginBottom: "-0.14em", perspective: 900 });
             return gsap.from(self.lines, {

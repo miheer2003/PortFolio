@@ -140,13 +140,19 @@ const Numbers = () => {
               onPointerLeave={() => setHot(null)}
             >
               <span className="num-in">
-                <span
-                  className="num-value"
-                  aria-label={`${s.pre ?? ""} ${s.value ?? ""}${s.suf ?? ""}`.trim()}
-                >
-                  {s.pre && <span className="num-pre mono">{s.pre}</span>}
+                <span className="num-value">
+                  <span className="visually-hidden">{`${s.pre ?? ""} ${s.value ?? ""}${s.suf ?? ""}`.trim()}</span>
+                  {s.pre && (
+                    <span className="num-pre mono" aria-hidden="true">
+                      {s.pre}
+                    </span>
+                  )}
                   <Odometer value={s.value} play={plays[i]} />
-                  {s.suf && <span className="num-suf serif">{s.suf}</span>}
+                  {s.suf && (
+                    <span className="num-suf serif" aria-hidden="true">
+                      {s.suf}
+                    </span>
+                  )}
                 </span>
                 <span className="num-label mono">
                   {s.live && <span className="live-dot" />}

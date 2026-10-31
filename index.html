@@ -2,37 +2,229 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>document.documentElement.classList.add("js")</script>
+    <style>
+      /* The readable copy inside #root is for visitors and crawlers without JavaScript. React replaces it on load. */
+      .js .seo-static{display:none}
+      html:not(.js) body{overflow-y:auto}
+      .seo-static{max-width:760px;margin:0 auto;padding:56px 24px 72px;font:400 17px/1.6 Geist,ui-sans-serif,system-ui,sans-serif;color:#2a1a15}
+      .seo-static h1{margin:0 0 8px;font-size:clamp(40px,8vw,64px);line-height:1;letter-spacing:-.04em;font-weight:400}
+      .seo-static h2{margin:56px 0 16px;font-size:28px;line-height:1.2;letter-spacing:-.02em;font-weight:500}
+      .seo-static h3{margin:24px 0 4px;font-size:19px;font-weight:500}
+      .seo-static p,.seo-static li,.seo-static dd{margin:0 0 10px}
+      .seo-static ul,.seo-static ol{margin:0;padding-left:20px;list-style:disc}
+      .seo-static dt{font-weight:500}
+      .seo-static dd{margin-left:0;color:#6f584b}
+      .seo-static a{color:#5c1726;text-decoration:underline;text-underline-offset:3px}
+      .seo-static .meta{color:#6f584b;font-size:15px}
+      .seo-static figure{margin:56px 0 0}
+      .seo-static blockquote{margin:0;font-size:24px}
+    </style>
+
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="apple-mobile-web-app-title" content="Miheer" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Portfolio of Miheer Jangale, a Software Engineer and AI Engineer. Explore my projects, skills, and experience in software development and artificial intelligence." />
+    <title>Miheer Jangale - Software Engineer | AI Engineer</title>
+    <meta name="description" content="Miheer Jangale builds LLM agents, RAG pipelines and Ruby on Rails apps at Nutsovertech in Pune. PG-DAC, CDAC ACTS (AIR 23). Projects, stack and contact." />
+    <link rel="canonical" href="https://www.miheerjangale.co.in/" />
     <meta name="keywords" content="Miheer, Miheer Jangale, Portfolio of software developer, Software Engineer, AI Engineer, Web Developer, Full Stack Developer, miheerjangale" />
     <meta name="author" content="Miheer Jangale" />
     <meta name="robots" content="index, follow" />
-    
-    <!-- Open Graph / Facebook -->
+
+    <!-- Open Graph (WhatsApp, LinkedIn, Facebook) -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Miheer Jangale" />
+    <meta property="og:url" content="https://www.miheerjangale.co.in/" />
     <meta property="og:title" content="Miheer Jangale - Software Engineer | AI Engineer" />
-    <meta property="og:description" content="Portfolio of Miheer Jangale, a Software Engineer and AI Engineer. Explore my projects, skills, and experience." />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Miheer Jangale - Software Engineer | AI Engineer" />
-    <meta property="twitter:description" content="Portfolio of Miheer Jangale, a Software Engineer and AI Engineer. Explore my projects, skills, and experience." />
+    <meta property="og:description" content="AI Engineer at Nutsovertech, Pune. LLM agents, RAG pipelines and Ruby on Rails products." />
+    <meta property="og:image" content="https://www.miheerjangale.co.in/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Miheer Jangale, Software and AI Engineer in Pune, India" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Miheer Jangale - Software Engineer | AI Engineer" />
+    <meta name="twitter:description" content="AI Engineer at Nutsovertech, Pune. LLM agents, RAG pipelines and Ruby on Rails products." />
+    <meta name="twitter:image" content="https://www.miheerjangale.co.in/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Miheer Jangale, Software and AI Engineer in Pune, India" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.miheerjangale.co.in/#website",
+            "url": "https://www.miheerjangale.co.in/",
+            "name": "Miheer Jangale",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://www.miheerjangale.co.in/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://www.miheerjangale.co.in/#profile",
+            "url": "https://www.miheerjangale.co.in/",
+            "name": "Miheer Jangale - Software Engineer | AI Engineer",
+            "inLanguage": "en",
+            "isPartOf": { "@id": "https://www.miheerjangale.co.in/#website" },
+            "dateModified": "2026-11-01",
+            "mainEntity": { "@id": "https://www.miheerjangale.co.in/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://www.miheerjangale.co.in/#person",
+            "name": "Miheer Jangale",
+            "url": "https://www.miheerjangale.co.in/",
+            "image": "https://www.miheerjangale.co.in/images/miheer-portrait.jpg",
+            "jobTitle": "AI Engineer",
+            "description": "AI Engineer at Nutsovertech in Pune, India. Builds LLM-powered products and agentic workflows, and handles Ruby on Rails projects end to end.",
+            "worksFor": { "@type": "Organization", "name": "Nutsovertech", "url": "https://nutsovertech.com/" },
+            "address": { "@type": "PostalAddress", "addressLocality": "Pune", "addressRegion": "Maharashtra", "addressCountry": "IN" },
+            "alumniOf": [
+              { "@type": "EducationalOrganization", "name": "CDAC ACTS, Pune" },
+              { "@type": "CollegeOrUniversity", "name": "MIT ADT University" },
+              { "@type": "EducationalOrganization", "name": "Sandip Polytechnic" }
+            ],
+            "knowsAbout": [
+              "Large language models", "AI agents", "Retrieval-augmented generation", "LangGraph", "LangChain",
+              "Model Context Protocol", "Python", "PyTorch", "Ruby on Rails", "Java", "Spring Boot", "React",
+              "TypeScript", "PostgreSQL", "AWS", "Docker"
+            ],
+            "hasCredential": [
+              { "@type": "EducationalOccupationalCredential", "name": "PG-DAC, Post Graduate Diploma in Advanced Computing", "credentialCategory": "diploma", "recognizedBy": { "@type": "EducationalOrganization", "name": "CDAC ACTS, Pune" } },
+              { "@type": "EducationalOccupationalCredential", "name": "AWS Cloud Practitioner", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Amazon Web Services" } },
+              { "@type": "EducationalOccupationalCredential", "name": "AWS Developer Associate", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Amazon Web Services" } },
+              { "@type": "EducationalOccupationalCredential", "name": "ML with Python", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Udemy" } },
+              { "@type": "EducationalOccupationalCredential", "name": "Database Management", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Infosys" } },
+              { "@type": "EducationalOccupationalCredential", "name": "Advanced JavaScript", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Infosys" } },
+              { "@type": "EducationalOccupationalCredential", "name": "Web Dev Bootcamp", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Udemy" } }
+            ],
+            "sameAs": ["https://github.com/miheer2003", "https://linkedin.com/in/miheer-jangale"]
+          }
+        ]
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#FFF8E7" />
-    <title>Miheer Jangale - Software Engineer | AI Engineer</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Keep this copy in sync with the section components when the page content changes. -->
+      <div class="seo-static">
+        <header>
+          <h1>Miheer Jangale</h1>
+          <p class="meta">Software &amp; AI Engineer · Pune, India</p>
+        </header>
+        <main>
+          <section>
+            <h2>About</h2>
+            <p>I'm Miheer, an AI Engineer at Nutsovertech. I build LLM-powered products and handle Ruby on Rails projects, combining clean engineering with AI to ship software that is fast and useful.</p>
+            <p>I completed the PG-DAC programme at CDAC ACTS, Pune with an All India Rank of 23. Before that I earned a B.Tech in Computer Engineering from MIT ADT University. Today I work across LangGraph, MCP and RAG pipelines on the AI side, and Ruby on Rails, Java, React and PostgreSQL on the product side.</p>
+            <dl>
+              <div><dt>Role</dt><dd>AI Engineer, Nutsovertech</dd></div>
+              <div><dt>Education</dt><dd>PG-DAC, CDAC ACTS · AIR 23</dd></div>
+              <div><dt>Focus</dt><dd>Gen AI, agents, Ruby on Rails</dd></div>
+              <div><dt>Based in</dt><dd>Pune, India</dd></div>
+            </dl>
+          </section>
+
+          <section>
+            <h2>Things I've built</h2>
+            <ul>
+              <li><a href="https://github.com/miheer2003/Uni-Yaar">UniYaar</a>: full-stack platform. Java 21 · Spring Boot 3 · React · TypeScript · MySQL</li>
+              <li><a href="https://github.com/miheer2003/PDF-Tool">PDF Tool</a>: document utility. In progress</li>
+              <li><a href="https://github.com/miheer2003/OptiRoute">OptiRoute</a>: route optimisation. Java · JavaScript · Docker</li>
+              <li><a href="https://github.com/miheer2003/Air-Light">AirLight</a>: computer vision · IoT. Python · MediaPipe · OpenCV · Flask · Tuya</li>
+              <li><a href="https://github.com/miheer2003/Task-Manager">Task Manager API</a>: backend · REST. Java · Spring Boot 3 · Hibernate · MySQL · OpenAPI</li>
+              <li><a href="https://github.com/miheer2003/JOB-HUNT-Automation-With-AI">JobHunt Agent</a>: AI agent · automation. Python · Claude · Gemini · Ollama · ATS APIs</li>
+              <li><a href="https://github.com/miheer2003?tab=repositories">More on GitHub</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>What I do</h2>
+            <h3>AI Engineering</h3>
+            <p>Intelligent systems &amp; automation. AI-powered products built on LLMs, NLP, prompt engineering, RAG and agent workflows, designed to make software smarter and teams faster.</p>
+            <p class="meta">Python · LangGraph · LangChain · MCP · RAG · AutoGen · CrewAI · TensorFlow · PyTorch · OpenCV</p>
+            <h3>Software Engineering</h3>
+            <p>Scalable full-stack applications. High-performance web applications with Java, Spring Boot, React, REST APIs and MySQL, with clean architecture and a strong focus on user experience.</p>
+            <p class="meta">Ruby on Rails · Java · Spring Boot · React · TypeScript · PostgreSQL · Docker · REST APIs · AWS</p>
+          </section>
+
+          <section>
+            <h2>The journey so far</h2>
+            <h3>AI Engineer · Ruby on Rails, Nutsovertech</h3>
+            <p class="meta">Now</p>
+            <p>Building LLM-powered features and agentic workflows, and handling Ruby on Rails projects end to end, from client requirements to production releases.</p>
+            <h3>PG-DAC, Advanced Computing, CDAC ACTS, Pune</h3>
+            <p class="meta">2025 – 2026</p>
+            <p>Post Graduate Diploma in Advanced Computing (Aug 2025 – Jan 2026). Secured All India Rank (AIR) 23.</p>
+            <h3>Software Development Intern, Xpedio Live, Pune</h3>
+            <p class="meta">2025</p>
+            <p>Built a full-stack Doctor Management Application with React and Spring Boot. Designed 10+ REST APIs with optimised MySQL queries, cutting data load time by 35%.</p>
+            <h3>B.Tech, Computer Engineering, MIT ADT University</h3>
+            <p class="meta">2022 – 2025</p>
+            <p>First Class. Coursework in OOP, DSA, DBMS, Computer Networks, Software Engineering, Operating Systems and Web Development.</p>
+            <h3>Diploma, Computer Science, Sandip Polytechnic, MSBTE</h3>
+            <p class="meta">2019 – 2022</p>
+            <p>Graduated with 80.11%. Coursework in C, OOP (C++), Data Structures, Operating Systems, Computer Networks and Web Development.</p>
+          </section>
+
+          <figure>
+            <blockquote><p>"Pressure is a privilege."</p></blockquote>
+            <figcaption class="meta">Billie Jean King</figcaption>
+          </figure>
+
+          <section>
+            <h2>Tools I trust</h2>
+            <dl>
+              <div><dt>AI engineering</dt><dd>MCP, LangGraph, LangChain, CrewAI, OpenAI, Claude, Gemini, Hugging Face, Ollama</dd></div>
+              <div><dt>LLM concepts</dt><dd>RAG, Context engineering, Embeddings &amp; vector DBs, Tool calling, Agentic workflows, Evals &amp; guardrails</dd></div>
+              <div><dt>ML</dt><dd>Python, PyTorch, FastAPI</dd></div>
+              <div><dt>Product</dt><dd>Ruby on Rails, Java, Spring Boot, React, TypeScript</dd></div>
+              <div><dt>Data &amp; ship</dt><dd>PostgreSQL, AWS, Docker, Git, GitHub</dd></div>
+            </dl>
+          </section>
+
+          <section>
+            <h2>Proof of practice</h2>
+            <ul>
+              <li>PG-DAC, Advanced Computing: CDAC ACTS, Pune, 2025. All India Rank 23</li>
+              <li>AWS Cloud Practitioner: Amazon Web Services, 2024</li>
+              <li>AWS Developer Associate: Amazon Web Services, 2024</li>
+              <li>ML with Python: Udemy, 2023</li>
+              <li>Database Management: Infosys, 2023</li>
+              <li>Advanced JavaScript: Infosys, 2023</li>
+              <li>Web Dev Bootcamp: Udemy, 2022</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Let's build something intelligent.</h2>
+            <p>Open to collaborations &amp; interesting problems.</p>
+            <p>Email: <a href="mailto:miheerjangale7@gmail.com">miheerjangale7@gmail.com</a></p>
+            <p>Phone: <a href="tel:+918177870012">+91 81778 70012</a></p>
+            <p>
+              <a href="https://github.com/miheer2003">GitHub</a> ·
+              <a href="https://linkedin.com/in/miheer-jangale">LinkedIn</a> ·
+              <a href="https://drive.google.com/file/d/1qq9yPUU2tygYuroMppPYi_-x5V9dt0Oe/view?usp=sharing">Résumé</a>
+            </p>
+          </section>
+        </main>
+        <footer class="meta"><p>© Miheer Jangale · Designed &amp; built by me</p></footer>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

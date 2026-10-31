@@ -1,0 +1,26 @@
+# Miheer Jangale
+
+> AI Engineer at Nutsovertech in Pune, India. Builds LLM-powered products and agentic workflows, and handles Ruby on Rails projects end to end.
+
+## Links
+
+- [Portfolio](https://www.miheerjangale.co.in/): projects, experience, stack, certifications and contact
+- [GitHub](https://github.com/miheer2003): source code for the projects below
+- [LinkedIn](https://linkedin.com/in/miheer-jangale)
+- [Résumé](https://drive.google.com/file/d/1qq9yPUU2tygYuroMppPYi_-x5V9dt0Oe/view?usp=sharing)
+
+## Projects
+
+- [UniYaar](https://github.com/miheer2003/Uni-Yaar): full-stack platform. Java 21, Spring Boot 3, React, TypeScript, MySQL
+- [PDF Tool](https://github.com/miheer2003/PDF-Tool): document utility, in progress
+- [OptiRoute](https://github.com/miheer2003/OptiRoute): route optimisation. Java, JavaScript, Docker
+- [AirLight](https://github.com/miheer2003/Air-Light): computer vision and IoT. Python, MediaPipe, OpenCV, Flask, Tuya
+- [Task Manager API](https://github.com/miheer2003/Task-Manager): backend REST API. Java, Spring Boot 3, Hibernate, MySQL, OpenAPI
+- [JobHunt Agent](https://github.com/miheer2003/JOB-HUNT-Automation-With-AI): AI agent and automation. Python, Claude, Gemini, Ollama, ATS APIs
+
+## Facts
+
+- Role: AI Engineer · Ruby on Rails at Nutsovertech
+- Education: PG-DAC (Advanced Computing) from CDAC ACTS, Pune, All India Rank 23; B.Tech in Computer Engineering from MIT ADT University
+- Stack: LangGraph, MCP, RAG, Python, PyTorch, FastAPI, Ruby on Rails, Java, Spring Boot, React, TypeScript, PostgreSQL, AWS, Docker
+- Contact: miheerjangale7@gmail.com
