@@ -1,0 +1,279 @@
+.gh {
+  position: relative;
+  margin-top: clamp(56px, 7vw, 96px);
+  padding: clamp(20px, 2.6vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--bg-elev), rgba(248, 236, 214, 0.4));
+}
+.gh-error {
+  padding: 24px;
+}
+
+.gh-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: clamp(18px, 2vw, 28px);
+}
+.gh-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--text-dim);
+}
+.gh-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  transition: border-color 0.3s, background 0.3s;
+}
+.gh-user:hover {
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+}
+.gh-total {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+}
+.gh-total strong {
+  font-size: clamp(32px, 3.2vw, 52px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.gh-total .mono {
+  color: var(--text-dim);
+}
+
+/* ---------- Calendar ---------- */
+.gh-grid {
+  --gap: clamp(2px, 0.25vw, 4px);
+  display: flex;
+  gap: var(--gap);
+}
+.gh-days,
+.gh-week {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+.gh-week {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.gh-days {
+  flex: 0 0 auto;
+  padding-right: 6px;
+}
+.gh-days span,
+.gh-month {
+  height: 12px;
+  font-size: 9.5px;
+  line-height: 12px;
+  color: var(--text-mute);
+  white-space: nowrap;
+}
+.gh-days span:first-child {
+  /* aligns with the month row */
+  margin-bottom: 0;
+}
+.gh-days span:not(:first-child) {
+  height: auto;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.gh-month {
+  overflow: visible;
+}
+
+.gh-cell {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: rgba(42, 26, 21, 0.06);
+}
+.gh-cell.l1 { background: #e9d3b4; }
+.gh-cell.l2 { background: #c9a184; }
+.gh-cell.l3 { background: #a06a5a; }
+.gh-cell.l4 { background: var(--burgundy); }
+.gh-cell.is-empty { background: transparent; }
+
+.gh-week .gh-cell[data-d] {
+  transition: transform 0.25s var(--ease-out, ease), box-shadow 0.25s;
+}
+.gh-week .gh-cell[data-d]:hover {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 1.5px var(--latte), 0 0 0 2.5px var(--espresso);
+  position: relative;
+  z-index: 1;
+}
+
+.is-loading .gh-week .gh-cell {
+  animation: gh-shimmer 1.6s ease-in-out infinite;
+}
+@keyframes gh-shimmer {
+  50% { opacity: 0.45; }
+}
+
+/* Wave in from the oldest week once visible */
+.is-ready:not(.is-in) .gh-week .gh-cell[data-d] {
+  opacity: 0;
+}
+.is-ready.is-in .gh-week .gh-cell[data-d] {
+  animation: gh-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(var(--i) * 14ms);
+}
+@keyframes gh-in {
+  from { opacity: 0; transform: scale(0.4); }
+}
+
+.gh-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 12px;
+  font-size: 10px;
+  color: var(--text-mute);
+}
+.gh-legend .gh-cell {
+  width: 10px;
+}
+.gh-legend .gh-cell:first-of-type { margin-left: 4px; }
+.gh-legend .gh-cell:last-of-type { margin-right: 4px; }
+
+/* ---------- Stats + repos ---------- */
+.gh-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(24px, 4vw, 64px);
+  margin-top: clamp(22px, 2.6vw, 36px);
+  padding-top: clamp(22px, 2.6vw, 32px);
+  border-top: 1px solid var(--line);
+}
+.gh-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 24px;
+  margin: 0;
+}
+.gh-stats dt {
+  color: var(--text-mute);
+  font-size: 11px;
+}
+.gh-stats dd {
+  margin: 6px 0 0;
+  font-size: clamp(22px, 1.8vw, 30px);
+  letter-spacing: -0.02em;
+}
+
+.gh-repos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.gh-repos li + li {
+  border-top: 1px solid var(--line);
+}
+.gh-repos a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  padding: 12px 0;
+  color: var(--text);
+}
+.gh-repo-name {
+  font-size: 17px;
+  transition: transform 0.4s var(--ease-out, ease);
+}
+.gh-repo-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  grid-row: 2;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.gh-repo-arrow {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  color: var(--text-dim);
+  transition: transform 0.4s var(--ease-out, ease), color 0.3s;
+}
+.gh-repos a:hover .gh-repo-name {
+  transform: translateX(6px);
+}
+.gh-repos a:hover .gh-repo-arrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+.gh-lang {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mocha);
+}
+.gh-lang[data-lang="TypeScript"] { background: #5c1726; }
+.gh-lang[data-lang="Java"] { background: #a47864; }
+.gh-lang[data-lang="Python"] { background: #6f584b; }
+.gh-lang[data-lang="JavaScript"] { background: #c9a184; }
+
+/* ---------- Tooltip ---------- */
+.gh-tip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--espresso);
+  color: var(--latte);
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.gh-tip.is-on {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .gh-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  /* Last ~6 months on phones so cells stay tappable */
+  .gh-week:nth-child(-n + 28) {
+    display: none;
+  }
+  .gh-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-ready:not(.is-in) .gh-week .gh-cell[data-d] {
+    opacity: 1;
+  }
+  .is-ready.is-in .gh-week .gh-cell[data-d] {
+    animation: none;
+  }
+}

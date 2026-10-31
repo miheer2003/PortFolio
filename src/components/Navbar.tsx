@@ -2,6 +2,7 @@ import CoffeeButton from "./CoffeeButton";
 import { useEffect, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getLenis, scrollToTarget } from "./utils/lenis";
+import { openTerminal } from "./utils/terminal";
 import "./styles/Navbar.css";
 
 const LINKS = [
@@ -78,6 +79,12 @@ const Navbar = () => {
         </nav>
 
         <div className="nav-right">
+          <button className="nav-term" onClick={openTerminal} aria-label="Open terminal" title="Terminal ( ` )">
+            <span aria-hidden="true">
+              {">"}
+              <span className="caret">_</span>
+            </span>
+          </button>
           <CoffeeButton compact className="nav-coffee" />
           <a href={RESUME} target="_blank" rel="noopener noreferrer" className="btn nav-resume">
             Résumé

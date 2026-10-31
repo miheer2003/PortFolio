@@ -13,6 +13,7 @@ import Landing from "./Landing";
 import Navbar from "./Navbar";
 import Quote from "./Quote";
 import TechStack from "./TechStack";
+import TerminalRoot from "./TerminalRoot";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import { prefersReducedMotion } from "./utils/lenis";
@@ -111,6 +112,7 @@ const MainContainer = () => {
       <Certifications />
       <Contact />
       <CoffeeRoot />
+      <TerminalRoot />
       <ScrollStar />
       <div className="grain" aria-hidden="true" />
     </div>
