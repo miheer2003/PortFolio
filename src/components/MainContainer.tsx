@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import About from "./About";
 import Career from "./Career";
 import Certifications from "./Certifications";
+import CoffeeRoot from "./CoffeeRoot";
 import Contact from "./Contact";
 import Cursor from "./Cursor";
 import Landing from "./Landing";
@@ -108,6 +109,7 @@ const MainContainer = () => {
       <TechStack />
       <Certifications />
       <Contact />
+      <CoffeeRoot />
       <div className="grain" aria-hidden="true" />
     </div>
   );

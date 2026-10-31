@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MdArrowOutward, MdArrowUpward } from "react-icons/md";
 import "./styles/Contact.css";
+import CoffeeButton from "./CoffeeButton";
 import { useLocalTime } from "./Landing";
 import { scrollToTarget } from "./utils/lenis";
 
@@ -54,6 +55,7 @@ const Contact = () => {
           <button className="btn" onClick={copy} aria-live="polite">
             {copied ? "Copied ✓" : "Copy email"}
           </button>
+          <CoffeeButton />
         </div>
 
         <div className="contact-grid">

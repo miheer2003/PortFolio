@@ -1,3 +1,4 @@
+import CoffeeButton from "./CoffeeButton";
 import { useEffect, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getLenis, scrollToTarget } from "./utils/lenis";
@@ -77,6 +78,7 @@ const Navbar = () => {
         </nav>
 
         <div className="nav-right">
+          <CoffeeButton compact className="nav-coffee" />
           <a href={RESUME} target="_blank" rel="noopener noreferrer" className="btn nav-resume">
             Résumé
           </a>

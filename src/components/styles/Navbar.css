@@ -225,3 +225,21 @@
   transition: color 0.5s var(--ease-out), background-color 0.5s var(--ease-out),
     border-color 0.5s var(--ease-out);
 }
+
+/* Coffee button: icon-only, sits next to Résumé (and next to the menu toggle on mobile) */
+.header .nav-coffee {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 248, 231, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.header.is-dark .nav-coffee {
+  background: rgba(42, 26, 21, 0.6);
+}
+@media (max-width: 860px) {
+  .header .nav-coffee {
+    width: 44px;
+    height: 44px;
+  }
+}

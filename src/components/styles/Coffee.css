@@ -1,0 +1,308 @@
+/* ---------- Cup icon ---------- */
+.cup {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cup.is-big {
+  width: 44px;
+  height: 44px;
+  stroke-width: 1.5;
+}
+.cup-fill {
+  fill: rgba(164, 120, 100, 0.25);
+}
+.cup-coffee {
+  stroke: var(--mocha);
+  stroke-width: 2.4;
+}
+.cup-body {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: cup-shake 3.2s var(--ease-in-out) infinite;
+}
+.cup-steam path {
+  stroke-width: 1.5;
+  stroke-dasharray: 8;
+  opacity: 0;
+  animation: cup-steam 2.4s ease-out infinite;
+}
+.cup-steam path:nth-child(2) { animation-delay: 0.45s; }
+.cup-steam path:nth-child(3) { animation-delay: 0.9s; }
+
+/* quick wiggle, then rest */
+@keyframes cup-shake {
+  0%, 62%, 100% { transform: rotate(0); }
+  66% { transform: rotate(-12deg) translateX(-1px); }
+  70% { transform: rotate(10deg) translateX(1px); }
+  74% { transform: rotate(-8deg); }
+  78% { transform: rotate(6deg); }
+  82% { transform: rotate(-3deg); }
+  86% { transform: rotate(0); }
+}
+@keyframes cup-shake-hover {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-11deg) translateX(-1px); }
+  75% { transform: rotate(11deg) translateX(1px); }
+}
+@keyframes cup-steam {
+  0% { opacity: 0; stroke-dashoffset: 8; transform: translateY(2px); }
+  30% { opacity: 0.9; }
+  100% { opacity: 0; stroke-dashoffset: -8; transform: translateY(-3px); }
+}
+
+/* ---------- Button ---------- */
+.coffee-btn {
+  gap: 10px;
+}
+.coffee-btn:hover .cup-body,
+.coffee-btn:focus-visible .cup-body {
+  animation: cup-shake-hover 0.32s linear infinite;
+}
+.coffee-btn.is-compact {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  justify-content: center;
+}
+
+/* ---------- Modal ---------- */
+.coffee-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(42, 26, 21, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s var(--ease-out), visibility 0s linear 0.35s;
+}
+.coffee-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s var(--ease-out);
+}
+.coffee-modal {
+  position: relative;
+  width: min(420px, 100%);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 28px 24px 20px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: var(--latte);
+  color: var(--text);
+  box-shadow: 0 40px 100px -30px rgba(42, 26, 21, 0.6);
+  text-align: center;
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.5s var(--ease-out);
+}
+.coffee-overlay.is-open .coffee-modal {
+  transform: none;
+}
+.coffee-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  font-size: 18px;
+  color: var(--text-dim);
+}
+.coffee-close:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+
+.coffee-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--bg-elev-2);
+  color: var(--espresso);
+  margin-bottom: 12px;
+}
+.coffee-head h2 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+.coffee-head p {
+  margin: 10px auto 0;
+  max-width: 30ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.coffee-amounts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 22px;
+}
+.coffee-chip {
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elev);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+}
+.coffee-chip.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--latte);
+}
+.coffee-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 8px;
+  cursor: text;
+}
+.coffee-custom input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 16px; /* stops iOS zoom */
+}
+.coffee-custom input::placeholder {
+  color: var(--text-mute);
+}
+.coffee-custom.is-on input::placeholder {
+  color: rgba(255, 248, 231, 0.7);
+}
+.coffee-error {
+  margin: 8px 0 0;
+  color: var(--accent);
+}
+
+.coffee-pay {
+  margin-top: 18px;
+}
+.coffee-scan {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  text-align: left;
+}
+.coffee-scan p {
+  margin: 0;
+  line-height: 1.7;
+}
+.coffee-scan strong {
+  color: var(--text);
+  font-size: 18px;
+}
+.coffee-qr {
+  width: 150px;
+  height: 150px;
+  flex: none;
+}
+.coffee-qr-bg {
+  fill: #fff;
+}
+.coffee-qr-fg {
+  fill: var(--espresso);
+}
+
+.coffee-apps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.coffee-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 64px;
+  border-radius: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elev);
+  font-size: 13px;
+}
+.coffee-app svg {
+  width: 22px;
+  height: 22px;
+}
+.coffee-app.is-primary {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  height: 54px;
+  font-size: 16px;
+  font-weight: 500;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--latte);
+}
+
+.coffee-upi {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px dashed var(--line-strong);
+  color: var(--text);
+  text-transform: none;
+}
+.coffee-upi svg {
+  color: var(--text-dim);
+}
+.coffee-foot {
+  margin: 12px 0 0;
+  font-size: 10px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cup-body,
+  .cup-steam path,
+  .coffee-btn:hover .cup-body {
+    animation: none;
+  }
+  .cup-steam path {
+    opacity: 0.6;
+  }
+}
