@@ -1,69 +1,83 @@
-# Miheer Jangale - Portfolio Website
+<p align="center">
+  <a href="https://www.miheerjangale.co.in">
+    <img src="public/og-image.jpg" alt="Miheer Jangale, Software and AI Engineer in Pune, India" width="100%">
+  </a>
+</p>
 
-Welcome to my personal portfolio website! This project is designed to showcase my skills, experience, and projects through an interactive, visually engaging, and 3D-enhanced experience.
+<p align="center">
+  <a href="https://www.miheerjangale.co.in"><b>miheerjangale.co.in</b></a>
+  &nbsp;·&nbsp;
+  <a href="https://linkedin.com/in/miheer-jangale">LinkedIn</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/miheer2003">GitHub</a>
+  &nbsp;·&nbsp;
+  <a href="mailto:miheerjangale7@gmail.com">Email</a>
+</p>
 
-## 🚀 Product Description (PRD)
-The goal of this portfolio is to create a memorable and premium user experience that goes beyond a standard static resume. It serves as a centralized hub for my career journey, highlighting my technical skills, professional work, and certifications. The core requirements for this product include:
-- **Immersive 3D Experience**: Utilizing 3D objects and physics to create a dynamic environment.
-- **Smooth Animations**: High-quality, performant animations for page transitions and element interactions.
-- **Responsive Design**: Ensuring the experience is seamless across desktops, tablets, and mobile devices.
-- **Performance**: Fast loading times despite heavy 3D assets and animations.
+This is the code behind my portfolio. I'm an AI Engineer at Nutsovertech in Pune, building LLM agents, RAG pipelines and Ruby on Rails products. The site is one page with a few interactive pieces, and each of them is built to stay smooth on laptops and phones.
 
-## 🛠️ Tech Stack
-This project is built using modern web technologies to ensure performance and maintainability:
-- **Core**: React 18, TypeScript, Vite
-- **3D & Canvas**: Three.js, React Three Fiber (@react-three/fiber), React Three Drei (@react-three/drei), React Three Cannon & Rapier (for 3D physics)
-- **Animations**: GSAP (GreenSock Animation Platform) via `@gsap/react`
-- **Styling**: Custom Vanilla CSS with responsive design principles
-- **Utilities**: `react-fast-marquee` for scrolling text, `react-icons` for scalable vector icons
-- **Analytics**: Vercel Analytics
+<img src=".github/readme/hero.webp" alt="The opening screen of the site on a laptop" width="100%">
 
-## 🏗️ How the Site is Made
-The website is structured as a Single Page Application (SPA) using **React** and built with **Vite** for fast HMR and optimized production builds. 
-- **Component-Based Architecture**: The UI is broken down into modular components (`Navbar`, `About`, `Work`, `TechStack`, etc.) found in the `src/components` directory.
-- **3D Integration**: React Three Fiber is used to render a 3D canvas seamlessly alongside standard HTML elements. The 3D elements are managed as declarative React components.
-- **State Management**: React Hooks are utilized for managing application state, such as loading phases.
-- **Deployment**: The site is configured for easy deployment via GitHub Pages (`gh-pages`) and is also setup with Vercel Analytics.
+## What's on the page
 
-## ✨ How Animations are Used
-Animations play a critical role in the user experience of this portfolio:
-- **GSAP (GreenSock)**: Used for complex, timeline-based animations. This includes text reveal effects, scroll-triggered animations, and smooth transitions between sections.
-- **React Three Fiber (R3F)**: Handles the 3D physics and animations within the WebGL canvas. Components like the 3D Tech Stack use physical properties (via Cannon/Rapier) to allow users to interact with 3D objects (e.g., throwing or dragging tech icons).
-- **Custom Cursor**: A custom animated cursor (`Cursor.tsx`) replaces the default browser pointer to enhance the immersive feel.
-- **Micro-interactions**: Hover effects on links and buttons are styled with CSS transitions and GSAP to provide immediate visual feedback.
+| Section | What it does |
+|---|---|
+| Loader | A 3D word drum turns through Engineer, Builder, AI Engineer and Miheer. At 100% the orbiting star flies into the hero photo and the screen opens like blinds. |
+| Hero | My name around a WebGL portrait that bends as you scroll, with a live Pune clock and today's date. |
+| Scroll star | The star from the loader follows you down the page and rests in the section titles. |
+| About | A three.js neural network that spins with scroll and fires when you click or tap it. |
+| Work | Six projects, each with a drawn cover that follows the cursor, and a live GitHub contributions row. |
+| What I do | Extruded letters and cards that tilt with the pointer, or with scroll on touch screens. |
+| Experience | A rolodex timeline that turns as you scroll. |
+| Numbers | My All India Rank, live GitHub contributions and results from my internship, rolled in on odometer digits. |
+| Stack | A keycap board drawn on canvas. Hover, click or type a letter to press a tool, press Enter to ship it, and scroll to send light across the keys. |
+| Proof of practice | An endless 3D deck of seven certificates. Drag or swipe through it and flip the top card. |
+| Contact | 3D letters, email, phone and links. |
+| Terminal | Press `` ` `` or the `>_` button to open a small terminal. Try `help`, `projects`, `skills` or `resume`. |
+| Buy me a coffee | The cup in the navbar opens a UPI payment: a QR code on laptops, app links on phones. |
 
-## 🗺️ What's in the Website
-The portfolio is divided into several key sections to provide a comprehensive overview of my profile:
-- **Loading Screen (`Loading.tsx`)**: An initial loading state to ensure all 3D assets and fonts are ready before the user enters the site.
-- **Landing / Hero (`Landing.tsx`)**: The first impression, featuring a strong headline and an interactive 3D character or scene.
-- **About (`About.tsx`)**: A brief introduction to who I am and my background.
-- **What I Do (`WhatIDo.tsx`)**: An overview of my core competencies and services.
-- **Tech Stack (`TechStack.tsx`)**: An interactive, physics-based 3D playground showcasing the technologies I work with.
-- **Work / Projects (`Work.tsx` & `WorkImage.tsx`)**: A gallery of my past projects and professional experience.
-- **Career Journey (`Career.tsx`)**: A timeline or summary of my professional roles and growth.
-- **Certifications (`Certifications.tsx`)**: Highlights of my professional certifications and continuous learning.
-- **Contact (`Contact.tsx`)**: A section providing links to my social profiles (via `SocialIcons.tsx`) and ways to reach out.
+<table>
+  <tr>
+    <td width="50%"><img src=".github/readme/loader.webp" alt="Loader"><p align="center"><sub>Loader</sub></p></td>
+    <td width="50%"><img src=".github/readme/work.webp" alt="Work"><p align="center"><sub>Work</sub></p></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src=".github/readme/career.webp" alt="Experience"><p align="center"><sub>Experience</sub></p></td>
+    <td width="50%"><img src=".github/readme/stack.webp" alt="Stack"><p align="center"><sub>Stack</sub></p></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src=".github/readme/certificates.webp" alt="Proof of practice"><p align="center"><sub>Proof of practice</sub></p></td>
+    <td width="50%"><img src=".github/readme/contact.webp" alt="Contact"><p align="center"><sub>Contact</sub></p></td>
+  </tr>
+</table>
 
-## 💻 Running Locally
+On phones, the pointer effects become taps, swipes and scrolling, and each project shows its cover inside the list.
 
-To run this project on your local machine:
+<img src=".github/readme/phones.webp" alt="The hero, the Stack keycap board and the certificate deck on a phone" width="100%">
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+## Built with
 
----
-*Built with ❤️ by Miheer Jangale.*
+React 18 · TypeScript · Vite · GSAP with ScrollTrigger and SplitText · Lenis · three.js · Canvas 2D · react-icons · Vercel
+
+## How it's built
+
+- **Structure.** `src/components/` has one component and one stylesheet per section. Links and projects live in `src/data/profile.ts`, so the page and the terminal share them.
+- **GitHub data.** `api/github.ts` is a Vercel function that returns my contribution calendar and latest repos, cached for an hour, so the browser never calls GitHub directly.
+- **Performance.** Animations change only `transform` and `opacity`. The canvas and WebGL scenes draw only while they are on screen. Scrolling was tested at 60 fps at 1440, 1366, 1280, 390 and 360 px widths.
+- **Touch and reduced motion.** Pointer effects run only with a mouse or trackpad, and touch screens get scroll-driven versions. With reduced motion turned on, every effect has a still version.
+- **Search and AI crawlers.** The page text, structured data (Person and ProfilePage) and share tags are in the first HTML response, so crawlers that don't run JavaScript can still read the site. `llms.txt` gives AI tools a short summary.
+
+## Brand
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="brand/PNG/logo/Mj-logo-for-dark-bg.png">
+  <img src="brand/PNG/logo/Mj-logo-for-light-bg.png" alt="Mj logo" width="84">
+</picture>
+
+The Mj logo pairs a Geist M with an Instrument Serif italic j whose dot is the site's four-point star. Every version of the logo, in PNG and SVG, is in [`brand/`](brand).
+
+<img src=".github/readme/palette.webp" alt="Palette: espresso #2A1A15, burgundy #5C1726, mocha #A47864, cream #E9D8BF, latte #FFF8E7" width="100%">
+
+## Credits
+
+The first version of this site started from [Moncy Yohannan's portfolio](https://github.com/MoncyDev/Portfolio-Website). It has since been redesigned and rewritten. Fonts: Geist and Geist Mono by Vercel, and Instrument Serif by Instrument, all under the SIL Open Font License. Icons come from Simple Icons, Font Awesome and Material Design Icons through react-icons.

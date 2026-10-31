@@ -1,4 +1,0 @@
-{
-  "buildCommand": "echo \"Skipping build, deploying static files directly\"",
-  "outputDirectory": "."
-}
