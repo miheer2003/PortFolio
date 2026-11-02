@@ -26,12 +26,6 @@
 
 <br/>
 
-<a href="https://www.miheerjangale.co.in">
-  <img src=".github/readme/hero.webp" alt="Miheer Jangale - 3D Portfolio Hero" width="100%" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);" />
-</a>
-
-<br/><br/>
-
 **An ultra-responsive, highly interactive 3D personal portfolio engineered with React 18, TypeScript, Three.js, Canvas 2D, and GSAP. Blends creative WebGL visuals, real-time terminal emulation, physical keycap interactions, and 60 FPS momentum scrolling.**
 
 [Explore Live Experience 🌐](https://www.miheerjangale.co.in) • [Launch In-Browser Terminal 💻](#-in-browser-developer-terminal) • [Explore Projects 📁](#-featured-engineering-work) • [Architecture ⚡](#-performance--engineering-feats)
@@ -44,6 +38,23 @@
 
 This repository houses the complete source code for **[miheerjangale.co.in](https://www.miheerjangale.co.in)**. Engineered to eliminate static resume monotony, this portfolio acts as a living showcase of high-concurrency systems, AI agent workflows, and tactile visual computing.
 
+```
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                                                                               │
+│   $ miheer --status                                                           │
+│   > AI Engineer @ Nutsovertech | Agentic Workflows & RAG Systems              │
+│                                                                               │
+│   $ miheer whoami                                                             │
+│   > Miheer Jangale — CDAC PG-DAC AIR 23 | B.Tech Computer Engineering        │
+│                                                                               │
+│   $ miheer stack --core                                                       │
+│   > [AI]        Claude · Gemini · Ollama · LangGraph · LangChain · RAG · MCP  │
+│   > [Frontend]  React 18 · TypeScript · Vite · Three.js · GSAP · Lenis       │
+│   > [Backend]   Ruby on Rails · Java 21 · Spring Boot 3 · PostgreSQL · AWS    │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+```
+
 ### 💎 Key Highlights
 
 - 🖥️ **Interactive Embedded Terminal**: Built-in interactive CLI triggered via the `` ` `` key or floating `>_` widget with shell commands (`whoami`, `projects`, `skills`, `github`, `sudo`, `coffee`).
@@ -54,43 +65,6 @@ This repository houses the complete source code for **[miheerjangale.co.in](http
 - 📈 **Dynamic Odometer Metric Counters**: Numeric roller animations tracking All India Rank 23 (CDAC PG-DAC), live GitHub stats, and internship throughput.
 - ☕ **Native UPI / Buy Me a Coffee Gateway**: Dynamic modal generating instant UPI QR codes on desktop and native payment deep-links on mobile devices.
 - ⚡ **60 FPS Hardware-Accelerated Motion**: Custom integration coupling Lenis smooth scrolling with GSAP `ScrollTrigger` directly on the requestAnimationFrame ticker.
-
----
-
-## 📸 Visual Showcase
-
-<table align="center" width="100%">
-  <tr>
-    <td width="50%" align="center">
-      <img src=".github/readme/loader.webp" alt="Interactive 3D Loader" width="100%" style="border-radius: 8px;" />
-      <p><sub><b>01. 3D Kinematic Loader & Blind Reveal</b></sub></p>
-    </td>
-    <td width="50%" align="center">
-      <img src=".github/readme/work.webp" alt="Work & Interactive Art" width="100%" style="border-radius: 8px;" />
-      <p><sub><b>02. Curated Projects with Cursor-Tracking Art</b></sub></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <img src=".github/readme/stack.webp" alt="Interactive Keycap Board" width="100%" style="border-radius: 8px;" />
-      <p><sub><b>03. Interactive Mechanical Keycap Canvas</b></sub></p>
-    </td>
-    <td width="50%" align="center">
-      <img src=".github/readme/certificates.webp" alt="3D Certificate Deck" width="100%" style="border-radius: 8px;" />
-      <p><sub><b>04. Physics-Based 3D Certificate Carousel</b></sub></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <img src=".github/readme/career.webp" alt="Career & Academic Timeline" width="100%" style="border-radius: 8px;" />
-      <p><sub><b>05. Scrub-Triggered Rolodex Timeline</b></sub></p>
-    </td>
-    <td width="50%" align="center">
-      <img src=".github/readme/contact.webp" alt="Magnetic Contact Section" width="100%" style="border-radius: 8px;" />
-      <p><sub><b>06. Magnetic Social Controls & Direct Reach</b></sub></p>
-    </td>
-  </tr>
-</table>
 
 ---
 
@@ -226,27 +200,19 @@ On mobile devices and touch displays:
 - The interactive mechanical keycap board scales seamlessly to touch screens.
 - Interactive project tiles embed visual cover art inline within the list for effortless mobile browsing.
 
-<div align="center">
-  <img src=".github/readme/phones.webp" alt="Mobile Responsive Experience" width="90%" style="border-radius: 10px;" />
-</div>
-
 ---
 
 ## 🎨 Design System & Palette
 
 The visual identity is anchored around an intentional warm-vintage palette:
 
-| Name | Hex Code | Purpose |
-|---|---|---|
-| **Espresso** | `#2A1A15` | Deep grounding contrast & typography |
-| **Burgundy** | `#5C1726` | Accent borders, badges & focal points |
-| **Mocha** | `#A47864` | Subheadings, secondary badges & icons |
-| **Cream** | `#E9D8BF` | Canvas backgrounds & subtle cards |
-| **Latte** | `#FFF8E7` | Highlights & primary card surfaces |
-
-<div align="center">
-  <img src=".github/readme/palette.webp" alt="Color Palette Showcase" width="100%" style="border-radius: 8px;" />
-</div>
+| Swatch | Name | Hex Code | Purpose |
+|:---:|---|---|---|
+| 🟫 | **Espresso** | `#2A1A15` | Deep grounding contrast & primary typography |
+| 🍷 | **Burgundy** | `#5C1726` | Accent borders, badges & focal highlights |
+| 🟤 | **Mocha** | `#A47864` | Subheadings, secondary badges & icons |
+| 📜 | **Cream** | `#E9D8BF` | Canvas backgrounds & subtle cards |
+| 🥛 | **Latte** | `#FFF8E7` | Highlights & primary card surfaces |
 
 ---
 
